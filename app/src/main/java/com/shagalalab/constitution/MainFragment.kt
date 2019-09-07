@@ -14,10 +14,38 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        en_flag.setOnClickListener {
-            Toast.makeText(activity?.applicationContext,"Clicked", Toast.LENGTH_SHORT).show()
-        }
         return inflater.inflate(R.layout.fragment_main, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        en_flag.setOnClickListener {
+            showMessage()
+        }
+        en_text.setOnClickListener {
+            showMessage()
+        }
+        qq_flag.setOnClickListener {
+            showMessage()
+        }
+        qq_text.setOnClickListener {
+            showMessage()
+        }
+        uz_flag.setOnClickListener {
+            showMessage()
+        }
+        uz_text.setOnClickListener {
+            showMessage()
+        }
+        ru_flag.setOnClickListener {
+            showMessage()
+        }
+        ru_text.setOnClickListener {
+            showMessage()
+        }
+    }
+    private fun showMessage(){
+        Toast.makeText(activity, "Clicked", Toast.LENGTH_SHORT).show()
     }
 }
 
