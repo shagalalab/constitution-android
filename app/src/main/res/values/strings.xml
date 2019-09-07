@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Constitution</string>
+    <string name="qaraqalpaqsha">Qaraqalpaqsha</string>
+    <string name="orissha">Русский</string>
+    <string name="ózbekshe">O\'zbekcha</string>
+    <string name="english">English</string>
 </resources>
