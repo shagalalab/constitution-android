@@ -44,8 +44,7 @@ class MainFragment : Fragment() {
             showMessage()
         }
     }
-    private fun showMessage(){
+    private fun showMessage() {
         Toast.makeText(activity, "Clicked", Toast.LENGTH_SHORT).show()
     }
 }
-
