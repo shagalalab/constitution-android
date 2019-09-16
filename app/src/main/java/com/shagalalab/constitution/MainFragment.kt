@@ -20,31 +20,43 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         en_flag.setOnClickListener {
-            showMessage()
+            showMessage("en")
         }
         en_text.setOnClickListener {
-            showMessage()
+            showMessage("en")
         }
         qq_flag.setOnClickListener {
-            showMessage()
+            showMessage("qq")
         }
         qq_text.setOnClickListener {
-            showMessage()
+            showMessage("qq")
         }
         uz_flag.setOnClickListener {
-            showMessage()
+            showMessage("uz")
         }
         uz_text.setOnClickListener {
-            showMessage()
+            showMessage("uz")
         }
         ru_flag.setOnClickListener {
-            showMessage()
+            showMessage("ru")
         }
         ru_text.setOnClickListener {
-            showMessage()
+            showMessage("ru")
         }
     }
-    private fun showMessage() {
-        Toast.makeText(activity, "Clicked", Toast.LENGTH_SHORT).show()
+
+    private fun showMessage(lang: String) {
+        if (lang == "en") {
+            Toast.makeText(activity, "EN Clicked", Toast.LENGTH_SHORT).show()
+        }
+        if (lang == "ru") {
+            Toast.makeText(activity, "RU Clicked", Toast.LENGTH_SHORT).show()
+        }
+        if (lang == "qq") {
+            Toast.makeText(activity, "QQ Clicked", Toast.LENGTH_SHORT).show()
+        }
+        if (lang == "uz") {
+            Toast.makeText(activity, "UZ Clicked", Toast.LENGTH_SHORT).show()
+        }
     }
 }

@@ -8,9 +8,8 @@
 
     <fragment
         android:id="@+id/main_fragment"
+        android:name="com.shagalalab.constitution.MainFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.shagalalab.constitution.MainFragment">
-    </fragment>
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

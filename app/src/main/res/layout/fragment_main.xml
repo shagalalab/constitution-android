@@ -1,103 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
-    <View
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/qq_flag"
-        android:layout_width="@dimen/flag_width"
-        android:layout_height="@dimen/flag_height"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/ru_flag"
-        app:layout_constraintBottom_toTopOf="@+id/line"
-        android:src="@drawable/qq"
-        android:layout_marginBottom="24dp"
+        android:layout_width="@dimen/flag_size"
+        android:layout_height="@dimen/flag_size"
         android:layout_marginLeft="@dimen/standard_margin"
-        android:layout_marginRight="@dimen/standard_margin" />
+        android:layout_marginRight="@dimen/standard_margin"
+        android:layout_marginBottom="@dimen/big_margin"
+        android:src="@drawable/qq"
+        app:layout_constraintBottom_toTopOf="@id/line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/ru_flag" />
+
     <TextView
         android:id="@+id/qq_text"
+        style="@style/flag_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/qaraqalpaqsha"
-        android:textSize="20sp"
-        android:textColor="@color/blue"
+        android:text="@string/lang_qq"
         app:layout_constraintLeft_toLeftOf="@id/qq_flag"
-        app:layout_constraintRight_toRightOf="@+id/qq_flag"
-        app:layout_constraintTop_toBottomOf="@+id/qq_flag"/>
+        app:layout_constraintRight_toRightOf="@id/qq_flag"
+        app:layout_constraintTop_toBottomOf="@id/qq_flag" />
+
     <ImageView
         android:id="@+id/ru_flag"
-        android:layout_width="@dimen/flag_width"
-        android:layout_height="@dimen/flag_height"
-        android:layout_marginBottom="24dp"
-        android:layout_marginRight="@dimen/standard_margin"
+        android:layout_width="@dimen/flag_size"
+        android:layout_height="@dimen/flag_size"
         android:layout_marginLeft="@dimen/standard_margin"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/qq_flag"
-        app:layout_constraintBottom_toTopOf="@+id/line"
+        android:layout_marginRight="@dimen/standard_margin"
+        android:layout_marginBottom="@dimen/big_margin"
         android:src="@drawable/ru"
-        />
+        app:layout_constraintBottom_toTopOf="@id/line"
+        app:layout_constraintLeft_toRightOf="@id/qq_flag"
+        app:layout_constraintRight_toRightOf="parent" />
+
     <TextView
         android:id="@+id/ru_text"
+        style="@style/flag_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/orissha"
-        android:textColor="@color/blue"
-        android:textSize="20sp"
+        android:text="@string/lang_ru"
         app:layout_constraintLeft_toLeftOf="@id/ru_flag"
         app:layout_constraintRight_toRightOf="@id/ru_flag"
-        app:layout_constraintTop_toBottomOf="@+id/ru_flag"/>
+        app:layout_constraintTop_toBottomOf="@id/ru_flag" />
 
     <ImageView
         android:id="@+id/uz_flag"
-        android:layout_width="@dimen/flag_width"
-        android:layout_height="@dimen/flag_height"
-        android:src="@drawable/uz"
-        android:layout_marginTop="24dp"
+        android:layout_width="@dimen/flag_size"
+        android:layout_height="@dimen/flag_size"
         android:layout_marginLeft="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/big_margin"
         android:layout_marginRight="@dimen/standard_margin"
+        android:src="@drawable/uz"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line"
-        app:layout_constraintRight_toLeftOf="@+id/en_flag"/>
+        app:layout_constraintRight_toLeftOf="@id/en_flag"
+        app:layout_constraintTop_toBottomOf="@id/line" />
+
     <TextView
         android:id="@+id/uz_text"
+        style="@style/flag_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/ózbekshe"
-        android:textColor="@color/blue"
+        android:text="@string/lang_uz"
         app:layout_constraintLeft_toLeftOf="@id/uz_flag"
         app:layout_constraintRight_toRightOf="@id/uz_flag"
-        app:layout_constraintTop_toBottomOf="@+id/uz_flag"/>
+        app:layout_constraintTop_toBottomOf="@id/uz_flag" />
+
     <ImageView
         android:id="@+id/en_flag"
-        android:layout_width="@dimen/flag_width"
-        android:layout_height="@dimen/flag_height"
-        android:src="@drawable/en"
-        android:layout_marginTop="24dp"
-        android:layout_marginRight="@dimen/standard_margin"
+        android:layout_width="@dimen/flag_size"
+        android:layout_height="@dimen/flag_size"
         android:layout_marginLeft="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/big_margin"
+        android:layout_marginRight="@dimen/standard_margin"
+        android:src="@drawable/en"
+        app:layout_constraintLeft_toRightOf="@id/uz_flag"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line"
-        app:layout_constraintLeft_toRightOf="@+id/uz_flag"/>
+        app:layout_constraintTop_toBottomOf="@id/line" />
+
     <TextView
         android:id="@+id/en_text"
+        style="@style/flag_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/english"
-        android:textColor="@color/blue"
-        android:textSize="20sp"
+        android:text="@string/lang_en"
         app:layout_constraintLeft_toLeftOf="@id/en_flag"
         app:layout_constraintRight_toRightOf="@id/en_flag"
-        app:layout_constraintTop_toBottomOf="@+id/en_flag"/>
+        app:layout_constraintTop_toBottomOf="@id/en_flag" />
 </androidx.constraintlayout.widget.ConstraintLayout>

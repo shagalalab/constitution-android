@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="flag_width">110dp</dimen>
-    <dimen name="flag_height">110dp</dimen>
-    <dimen name="standard_margin">16dp</dimen>
+<dimen name="flag_size">110dp</dimen>
+<dimen name="standard_margin">16dp</dimen>
+    <dimen name="big_margin">24dp</dimen>
+    <dimen name="text_size">20sp</dimen>
 </resources>

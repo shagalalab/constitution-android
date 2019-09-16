@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="flag_text_style">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
 </resources>
