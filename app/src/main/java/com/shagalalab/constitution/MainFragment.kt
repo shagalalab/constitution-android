@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,17 +47,6 @@ class MainFragment : Fragment() {
     }
 
     private fun showMessage(lang: String) {
-        if (lang == "en") {
-            Toast.makeText(activity, "EN Clicked", Toast.LENGTH_SHORT).show()
-        }
-        if (lang == "ru") {
-            Toast.makeText(activity, "RU Clicked", Toast.LENGTH_SHORT).show()
-        }
-        if (lang == "qq") {
-            Toast.makeText(activity, "QQ Clicked", Toast.LENGTH_SHORT).show()
-        }
-        if (lang == "uz") {
-            Toast.makeText(activity, "UZ Clicked", Toast.LENGTH_SHORT).show()
-        }
+        Toast.makeText(activity, "$lang clicked", Toast.LENGTH_SHORT).show()
     }
 }
