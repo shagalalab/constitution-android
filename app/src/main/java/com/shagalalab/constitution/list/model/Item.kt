@@ -1,4 +1,6 @@
 package com.shagalalab.constitution.list.model
 
-class Item {
-}
+data class Item(
+    var title: String,
+    var description: String
+)
