@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shagalalab.constitution.R
 import com.shagalalab.constitution.list.model.Item
 
-class ListAdapter : RecyclerView.Adapter<ItemViewHolder>() {
+class ListAdapter(private val itemClickListener: ItemClickListener) : RecyclerView.Adapter<ItemViewHolder>() {
 
     var models: MutableList<Item> = arrayListOf()
 
@@ -25,6 +25,6 @@ class ListAdapter : RecyclerView.Adapter<ItemViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.populateModel(models[position])
+        holder.populateModel(models[position], itemClickListener)
     }
 }
