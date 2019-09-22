@@ -13,9 +13,10 @@ import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListFragment : AppCompatActivity(), ItemClickListener {
 
-    companion object{
+    companion object {
         const val k = 10
     }
+
     private var lang = ""
     private val adapter = ListAdapter(this)
     override fun onCreate(savedInstanceState: Bundle?) {

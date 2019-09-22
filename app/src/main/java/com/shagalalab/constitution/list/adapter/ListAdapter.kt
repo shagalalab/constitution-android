@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shagalalab.constitution.R
 import com.shagalalab.constitution.list.model.Item
 
-class ListAdapter(private val itemClickListener: ItemClickListener) : RecyclerView.Adapter<ItemViewHolder>() {
+class ListAdapter(private val itemClickListener: ItemClickListener) :
+    RecyclerView.Adapter<ItemViewHolder>() {
 
     var models: MutableList<Item> = arrayListOf()
 

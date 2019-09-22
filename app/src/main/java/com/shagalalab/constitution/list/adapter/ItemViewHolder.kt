@@ -14,7 +14,7 @@ class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun populateModel(model: Item, itemClickListener: ItemClickListener) {
         title.text = model.title
         description.text = model.description
-        if (model.description == ""){
+        if (model.description == "") {
             description.visibility = View.GONE
         }
         itemView.setOnClickListener {
