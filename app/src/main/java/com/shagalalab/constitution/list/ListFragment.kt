@@ -11,8 +11,8 @@ import com.shagalalab.constitution.R
 import com.shagalalab.constitution.list.adapter.ItemClickListener
 import com.shagalalab.constitution.list.adapter.ListAdapter
 import com.shagalalab.constitution.list.model.Item
-import kotlinx.android.synthetic.main.fragment_list.*
 import kotlin.random.Random
+import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListFragment(private var lang: String) : Fragment(), ItemClickListener {
 
@@ -31,9 +31,9 @@ class ListFragment(private var lang: String) : Fragment(), ItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = ListAdapter(this)
+        adapter.setData(getData())
         list.adapter = adapter
         list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-        adapter.setData(getData())
     }
 
     private fun getData(): List<Item> {
