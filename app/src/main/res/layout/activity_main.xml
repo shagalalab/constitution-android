@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <fragment
-        android:id="@+id/main_fragment"
-        android:name="com.shagalalab.constitution.main.MainFragment"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
