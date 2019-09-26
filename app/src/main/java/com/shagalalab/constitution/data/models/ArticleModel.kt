@@ -1,4 +1,4 @@
-package com.shagalalab.constitution.data
+package com.shagalalab.constitution.data.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
