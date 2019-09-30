@@ -3,5 +3,7 @@
     <dimen name="flag_size">110dp</dimen>
     <dimen name="standard_margin">16dp</dimen>
     <dimen name="big_margin">24dp</dimen>
-    <dimen name="text_size">20sp</dimen>
+    <dimen name="text_size">16sp</dimen>
+    <dimen name="item_height">64dp</dimen>
+    <dimen name="title_text_size">18sp</dimen>
 </resources>
