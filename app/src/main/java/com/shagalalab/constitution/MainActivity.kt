@@ -3,8 +3,8 @@ package com.shagalalab.constitution
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.shagalalab.constitution.main.MainFragment
 import com.shagalalab.constitution.data.ConstitutionDatabase
+import com.shagalalab.constitution.main.MainFragment
 import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
