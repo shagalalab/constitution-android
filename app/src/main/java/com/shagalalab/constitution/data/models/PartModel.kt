@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Part")
+@Entity(tableName = "part")
 data class PartModel(
     @PrimaryKey
     @ColumnInfo(name = "id")

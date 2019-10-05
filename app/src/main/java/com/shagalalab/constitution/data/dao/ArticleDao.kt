@@ -7,6 +7,6 @@ import com.shagalalab.constitution.data.models.ArticleModel
 @Dao
 interface ArticleDao {
 
-    @Query("SELECT * FROM Article")
+    @Query("SELECT * FROM article")
     fun getArticles(): List<ArticleModel>
 }

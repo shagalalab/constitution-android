@@ -7,6 +7,6 @@ import com.shagalalab.constitution.data.models.PartModel
 @Dao
 interface PartDao {
 
-    @Query("SELECT * FROM Part")
+    @Query("SELECT * FROM part")
     fun getParts(): List<PartModel>
 }

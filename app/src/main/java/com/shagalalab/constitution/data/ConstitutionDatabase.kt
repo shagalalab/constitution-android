@@ -23,23 +23,17 @@ abstract class ConstitutionDatabase : RoomDatabase() {
     abstract fun partDao(): PartDao
 
     companion object {
-        private var INSTANCE: ConstitutionDatabase? = null
+        private lateinit var INSTANCE: ConstitutionDatabase
         fun getInstance(context: Context): ConstitutionDatabase {
-            if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(
-                    context.applicationContext,
-                    ConstitutionDatabase::class.java,
-                    "constitution.db"
-                )
-                    .createFromAsset("constitution.db")
-                    .allowMainThreadQueries()
-                    .build()
-            }
-            return INSTANCE!!
-        }
-
-        fun destroyInstance() {
-            INSTANCE = null
+            INSTANCE = Room.databaseBuilder(
+                context.applicationContext,
+                ConstitutionDatabase::class.java,
+                "constitution.db"
+            )
+                .createFromAsset("constitution.db")
+                .allowMainThreadQueries()
+                .build()
+            return INSTANCE
         }
     }
 }

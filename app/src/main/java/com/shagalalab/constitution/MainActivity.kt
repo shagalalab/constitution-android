@@ -13,9 +13,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val db = ConstitutionDatabase.getInstance(this)
-
+//        Log.d("partsize", db.partDao().getParts().size.toString())
         Executors.newSingleThreadExecutor().execute {
+            val db = ConstitutionDatabase.getInstance(this)
             println("mytest, parts size = ${db.partDao().getParts().size}")
             println("mytest, chapters size = ${db.chapterDao().getChapters().size}")
             println("mytest, articles size = ${db.articleDao().getArticles().size}")
