@@ -24,15 +24,17 @@ abstract class ConstitutionDatabase : RoomDatabase() {
 
     companion object {
         private lateinit var INSTANCE: ConstitutionDatabase
+
         fun getInstance(context: Context): ConstitutionDatabase {
-            INSTANCE = Room.databaseBuilder(
-                context.applicationContext,
-                ConstitutionDatabase::class.java,
-                "constitution.db"
-            )
-                .createFromAsset("constitution.db")
-                .allowMainThreadQueries()
-                .build()
+            if (!::INSTANCE.isInitialized) {
+                INSTANCE = Room.databaseBuilder(
+                    context.applicationContext,
+                    ConstitutionDatabase::class.java,
+                    "constitution.db"
+                )
+                    .createFromAsset("constitution.db")
+                    .build()
+            }
             return INSTANCE
         }
     }

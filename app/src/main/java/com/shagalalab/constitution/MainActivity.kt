@@ -12,8 +12,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-//        Log.d("partsize", db.partDao().getParts().size.toString())
         Executors.newSingleThreadExecutor().execute {
             val db = ConstitutionDatabase.getInstance(this)
             println("mytest, parts size = ${db.partDao().getParts().size}")

@@ -7,6 +7,6 @@ import com.shagalalab.constitution.data.models.ChapterModel
 @Dao
 interface ChapterDao {
 
-    @Query("SELECT * FROM chapter")
+    @Query("SELECT * FROM chapters")
     fun getChapters(): List<ChapterModel>
 }
