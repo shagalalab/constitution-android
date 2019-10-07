@@ -9,7 +9,7 @@ import com.shagalalab.constitution.list.model.Item
 class ListAdapter(private val itemClickListener: ItemClickListener) :
     RecyclerView.Adapter<ItemViewHolder>() {
 
-    var models: List<Item> = arrayListOf()
+    private var models: List<Item> = arrayListOf()
 
     fun setData(models: List<Item>) {
         this.models = models
