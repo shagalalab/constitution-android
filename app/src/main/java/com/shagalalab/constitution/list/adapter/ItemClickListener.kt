@@ -1,7 +1,7 @@
 package com.shagalalab.constitution.list.adapter
 
-import com.shagalalab.constitution.list.model.Item
+import com.shagalalab.constitution.data.models.PartModel
 
 interface ItemClickListener {
-    fun onItemClick(model: Item)
+    fun onItemClick(model: PartModel)
 }

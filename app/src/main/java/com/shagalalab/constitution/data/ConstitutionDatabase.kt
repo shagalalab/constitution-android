@@ -33,6 +33,7 @@ abstract class ConstitutionDatabase : RoomDatabase() {
                     "constitution.db"
                 )
                     .createFromAsset("constitution.db")
+                    .allowMainThreadQueries()
                     .build()
             }
             return INSTANCE

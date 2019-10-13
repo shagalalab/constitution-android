@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.shagalalab.constitution.R
-import com.shagalalab.constitution.list.model.Item
+import com.shagalalab.constitution.data.models.PartModel
 
 class ListAdapter(private val itemClickListener: ItemClickListener) :
     RecyclerView.Adapter<ItemViewHolder>() {
 
-    private var models: List<Item> = arrayListOf()
+    private var models: List<PartModel> = arrayListOf()
 
-    fun setData(models: List<Item>) {
+    fun setData(models: List<PartModel>) {
         this.models = models
     }
 
