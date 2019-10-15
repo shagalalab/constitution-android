@@ -13,6 +13,7 @@ class ListAdapter(private val itemClickListener: ItemClickListener) :
 
     fun setData(models: List<PartModel>) {
         this.models = models
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {

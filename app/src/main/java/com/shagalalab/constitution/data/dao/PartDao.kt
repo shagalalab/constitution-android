@@ -12,5 +12,5 @@ interface PartDao {
     fun getParts(): LiveData<List<PartModel>>
 
     @Query("SELECT * FROM parts WHERE lang_id=:langId")
-    fun getPartListByLangId(langId: Int): List<PartModel>
+    fun getPartListByLangId(langId: Int): MutableList<PartModel>
 }

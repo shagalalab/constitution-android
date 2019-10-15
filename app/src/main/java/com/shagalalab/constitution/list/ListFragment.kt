@@ -27,18 +27,13 @@ class ListFragment(private var lang: Int) : Fragment(R.layout.fragment_list), It
             ConstitutionDatabase.getInstance(context!!).chapterDao(),
             ConstitutionDatabase.getInstance(context!!).articleDao()
         )
+        viewModel.getPartsByLangId(lang)
         viewModel.partList.observe(this, Observer {
             adapter.setData(it)
         })
-        viewModel.getPartsByLangId(lang)
     }
 
     override fun onItemClick(model: PartModel) {
         Toast.makeText(context, model.title, Toast.LENGTH_SHORT).show()
     }
-/*
-    private fun showMessage(msg: String) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-    }
-*/
 }

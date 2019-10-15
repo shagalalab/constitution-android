@@ -6,19 +6,18 @@ import com.shagalalab.constitution.data.dao.ArticleDao
 import com.shagalalab.constitution.data.dao.ChapterDao
 import com.shagalalab.constitution.data.dao.PartDao
 import com.shagalalab.constitution.data.models.PartModel
+import java.util.concurrent.Executors
 
 class ListViewModel(
     private val partDao: PartDao,
     private val chapterDao: ChapterDao,
     private val articleDao: ArticleDao
 ) : ViewModel() {
-    var partList: MutableLiveData<List<PartModel>> = MutableLiveData()
-    var result: List<PartModel> = arrayListOf()
+    var partList: MutableLiveData<MutableList<PartModel>> = MutableLiveData()
+
     fun getPartsByLangId(langId: Int) {
-        partList.value = partDao.getPartListByLangId(langId)
-        /*Executors.newSingleThreadExecutor().execute {
-            result = partDao.getPartListByLangId(langId)
+        Executors.newSingleThreadExecutor().execute {
+            partList.postValue(partDao.getPartListByLangId(langId))
         }
-        partList.value = result*/
     }
 }
