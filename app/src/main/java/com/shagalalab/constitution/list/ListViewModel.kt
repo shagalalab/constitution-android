@@ -13,7 +13,7 @@ class ListViewModel(
 
     fun getPartsByLangId(langId: Int) {
         Executors.newSingleThreadExecutor().execute {
-            partList.postValue(partDao.getPartListByLangId(langId))
+            partList.postValue(partDao.getPartsByLanguage(langId))
         }
     }
 }

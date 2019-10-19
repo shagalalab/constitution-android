@@ -23,7 +23,7 @@ class ListFragment(private var lang: Int) : Fragment(R.layout.fragment_list), It
         list.adapter = adapter
         list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         viewModel = ListViewModel(
-            ConstitutionDatabase.getInstance(context!!).partDao()
+            ConstitutionDatabase.getInstance(requireContext()).partDao()
         )
         viewModel.getPartsByLangId(lang)
         viewModel.partList.observe(this, Observer {

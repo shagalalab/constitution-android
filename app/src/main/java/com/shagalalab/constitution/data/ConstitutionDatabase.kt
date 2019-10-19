@@ -23,7 +23,6 @@ abstract class ConstitutionDatabase : RoomDatabase() {
     abstract fun partDao(): PartDao
 
     companion object {
-
         private lateinit var INSTANCE: ConstitutionDatabase
 
         fun getInstance(context: Context): ConstitutionDatabase {
