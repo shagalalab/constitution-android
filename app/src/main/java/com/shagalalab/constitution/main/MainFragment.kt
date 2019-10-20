@@ -13,6 +13,10 @@ class MainFragment : Fragment() {
 
     companion object {
         const val TAG = "MainFragment"
+        const val QQ = 1
+        const val RU = 2
+        const val UZ = 3
+        const val EN = 4
     }
 
     override fun onCreateView(
@@ -30,32 +34,32 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         en_flag.setOnClickListener {
-            showMessage(en_text.text.toString())
+            showMessage(EN)
         }
         en_text.setOnClickListener {
-            showMessage(en_text.text.toString())
+            showMessage(EN)
         }
         qq_flag.setOnClickListener {
-            showMessage(qq_text.text.toString())
+            showMessage(QQ)
         }
         qq_text.setOnClickListener {
-            showMessage(qq_text.text.toString())
+            showMessage(QQ)
         }
         uz_flag.setOnClickListener {
-            showMessage(uz_text.text.toString())
+            showMessage(UZ)
         }
         uz_text.setOnClickListener {
-            showMessage(uz_text.text.toString())
+            showMessage(UZ)
         }
         ru_flag.setOnClickListener {
-            showMessage(ru_text.text.toString())
+            showMessage(RU)
         }
         ru_text.setOnClickListener {
-            showMessage(ru_text.text.toString())
+            showMessage(RU)
         }
     }
 
-    private fun showMessage(lang: String) {
+    private fun showMessage(lang: Int) {
         (activity as MainActivity).changeFragment(ListFragment(lang), TAG)
     }
 }

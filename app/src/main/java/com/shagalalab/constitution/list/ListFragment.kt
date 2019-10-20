@@ -1,48 +1,37 @@
 package com.shagalalab.constitution.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.shagalalab.constitution.R
+import com.shagalalab.constitution.data.ConstitutionDatabase
+import com.shagalalab.constitution.data.models.PartModel
 import com.shagalalab.constitution.list.adapter.ItemClickListener
 import com.shagalalab.constitution.list.adapter.ListAdapter
-import com.shagalalab.constitution.list.model.Item
-import kotlin.random.Random
 import kotlinx.android.synthetic.main.fragment_list.*
 
-class ListFragment(private var lang: String) : Fragment(), ItemClickListener {
+class ListFragment(private var lang: Int) : Fragment(R.layout.fragment_list), ItemClickListener {
 
-    companion object {
-        const val NUMBER_OF_ITEMS = 10
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_list, container, false)
-    }
+    private lateinit var viewModel: ListViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = ListAdapter(this)
-        adapter.setData(getData())
         list.adapter = adapter
         list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        viewModel = ListViewModel(
+            ConstitutionDatabase.getInstance(requireContext()).partDao()
+        )
+        viewModel.getPartsByLangId(lang)
+        viewModel.partList.observe(this, Observer {
+            adapter.setData(it)
+        })
     }
 
-    private fun getData(): List<Item> {
-        return List(NUMBER_OF_ITEMS) {
-            Item("$lang-title-$it", if (Random.nextBoolean()) "$lang-description-$it" else "")
-        }
-    }
-
-    override fun onItemClick(model: Item) {
+    override fun onItemClick(model: PartModel) {
         Toast.makeText(context, model.title, Toast.LENGTH_SHORT).show()
     }
 }
