@@ -1,4 +1,4 @@
-package com.shagalalab.constitution.list
+package com.shagalalab.constitution.part
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,7 @@ import com.shagalalab.constitution.data.dao.PartDao
 import com.shagalalab.constitution.data.models.PartModel
 import java.util.concurrent.Executors
 
-class ListViewModel(
+class PartViewModel(
     private val partDao: PartDao
 ) : ViewModel() {
     var partList: MutableLiveData<List<PartModel>> = MutableLiveData()

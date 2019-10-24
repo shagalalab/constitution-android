@@ -1,4 +1,4 @@
-package com.shagalalab.constitution.list.adapter
+package com.shagalalab.constitution.part.adapter
 
 import com.shagalalab.constitution.data.models.PartModel
 

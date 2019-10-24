@@ -1,4 +1,4 @@
-package com.shagalalab.constitution.list
+package com.shagalalab.constitution.part
 
 import android.os.Bundle
 import android.view.View
@@ -6,23 +6,29 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.shagalalab.constitution.MainActivity
 import com.shagalalab.constitution.R
+import com.shagalalab.constitution.chapter.ChapterFragment
 import com.shagalalab.constitution.data.ConstitutionDatabase
 import com.shagalalab.constitution.data.models.PartModel
-import com.shagalalab.constitution.list.adapter.ItemClickListener
-import com.shagalalab.constitution.list.adapter.ListAdapter
-import kotlinx.android.synthetic.main.fragment_list.*
+import com.shagalalab.constitution.part.adapter.ItemClickListener
+import com.shagalalab.constitution.part.adapter.PartAdapter
+import kotlinx.android.synthetic.main.fragment_part.*
 
-class ListFragment(private var lang: Int) : Fragment(R.layout.fragment_list), ItemClickListener {
+class PartFragment(private var lang: Int) : Fragment(R.layout.fragment_part), ItemClickListener {
 
-    private lateinit var viewModel: ListViewModel
+    companion object {
+        const val TAG = "PartFragment"
+    }
+
+    private lateinit var viewModel: PartViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = ListAdapter(this)
+        val adapter = PartAdapter(this)
         list.adapter = adapter
         list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-        viewModel = ListViewModel(
+        viewModel = PartViewModel(
             ConstitutionDatabase.getInstance(requireContext()).partDao()
         )
         viewModel.getPartsByLangId(lang)
@@ -32,6 +38,10 @@ class ListFragment(private var lang: Int) : Fragment(R.layout.fragment_list), It
     }
 
     override fun onItemClick(model: PartModel) {
-        Toast.makeText(context, model.title, Toast.LENGTH_SHORT).show()
+        if (model.description.isEmpty())
+            Toast.makeText(context, model.title, Toast.LENGTH_SHORT).show()
+        else {
+            (activity as MainActivity).changeFragment(ChapterFragment(model.id), TAG)
+        }
     }
 }
