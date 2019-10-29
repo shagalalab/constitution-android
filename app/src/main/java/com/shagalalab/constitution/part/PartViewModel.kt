@@ -9,11 +9,12 @@ import java.util.concurrent.Executors
 class PartViewModel(
     private val partDao: PartDao
 ) : ViewModel() {
-    var partList: MutableLiveData<List<PartModel>> = MutableLiveData()
-
+    private var partList: MutableLiveData<List<PartModel>> = MutableLiveData()
+    var partListToObserveOutside: MutableLiveData<List<PartModel>> = MutableLiveData()
     fun getPartsByLangId(langId: Int) {
         Executors.newSingleThreadExecutor().execute {
             partList.postValue(partDao.getPartsByLanguage(langId))
         }
+        partListToObserveOutside = partList
     }
 }
