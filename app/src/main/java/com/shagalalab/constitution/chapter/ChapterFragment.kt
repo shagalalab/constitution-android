@@ -30,7 +30,7 @@ class ChapterFragment(private val partId: Int) : Fragment(R.layout.fragment_chap
             ConstitutionDatabase.getInstance(requireContext()).chapterDao()
         )
         viewModel.getChaptersByPartId(partId)
-        viewModel.chapterListToObserveOutside.observe(this, Observer {
+        viewModel.chapterList.observe(this, Observer {
             adapter.setData(it)
         })
     }

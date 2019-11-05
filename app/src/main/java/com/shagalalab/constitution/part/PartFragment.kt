@@ -18,9 +18,6 @@ import kotlinx.android.synthetic.main.fragment_part.*
 class PartFragment(private var lang: Int) : Fragment(R.layout.fragment_part), ItemClickListener {
 
     companion object {
-        const val SEVEN = 7
-        const val ONE = 1
-        const val ZERO = 0
         const val TAG = "PartFragment"
     }
 
@@ -32,19 +29,24 @@ class PartFragment(private var lang: Int) : Fragment(R.layout.fragment_part), It
         list.adapter = adapter
         list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         viewModel = PartViewModel(
-            ConstitutionDatabase.getInstance(requireContext()).partDao()
+            ConstitutionDatabase.getInstance(requireContext()).partDao(),
+            ConstitutionDatabase.getInstance(requireContext()).chapterDao()
         )
         viewModel.getPartsByLangId(lang)
-        viewModel.partListToObserveOutside.observe(this, Observer {
+        viewModel.partList.observe(this, Observer {
             adapter.setData(it)
         })
     }
 
     override fun onItemClick(model: PartModel) {
-        if (model.id % SEVEN == ONE || model.id % SEVEN == ZERO)
-            Toast.makeText(context, model.title, Toast.LENGTH_SHORT).show()
-        else {
-            (activity as MainActivity).changeFragment(ChapterFragment(model.id), TAG)
-        }
+        viewModel.getChapterScreen(model.id)
+        viewModel.model.observe(this, Observer {
+            if (it == "no") {
+                Toast.makeText(context, model.title, Toast.LENGTH_SHORT).show()
+            }
+            else if(it == "yes") {
+                (activity as MainActivity).changeFragment(ChapterFragment(model.id), TAG)
+            }
+        })
     }
 }
