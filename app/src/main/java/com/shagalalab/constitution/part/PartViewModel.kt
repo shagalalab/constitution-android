@@ -14,8 +14,7 @@ class PartViewModel(
 ) : ViewModel() {
     private val partListLiveData: MutableLiveData<List<PartModel>> = MutableLiveData()
     lateinit var partList: LiveData<List<PartModel>>
-    var modelLiveData: MutableLiveData<String> = MutableLiveData()
-    lateinit var model: LiveData<String>
+    var modelLiveData: MutableLiveData<Pair<Int, Boolean>> = MutableLiveData()
     fun getPartsByLangId(langId: Int) {
         Executors.newSingleThreadExecutor().execute {
             partListLiveData.postValue(partDao.getPartsByLanguage(langId))
@@ -25,9 +24,13 @@ class PartViewModel(
 
     fun getChapterScreen(id: Int) {
         Executors.newSingleThreadExecutor().execute {
-            if (chapterDao.getChaptersByPartId(id).isNotEmpty()) modelLiveData.postValue("yes")
-            else modelLiveData.postValue("no")
+            if (chapterDao.getChaptersByPartId(id).isNotEmpty()) modelLiveData.postValue(
+                Pair(
+                    id,
+                    true
+                )
+            )
+            else modelLiveData.postValue(Pair(id, false))
         }
-        model = modelLiveData
     }
 }

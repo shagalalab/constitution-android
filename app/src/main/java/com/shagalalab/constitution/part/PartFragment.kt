@@ -36,17 +36,14 @@ class PartFragment(private var lang: Int) : Fragment(R.layout.fragment_part), It
         viewModel.partList.observe(this, Observer {
             adapter.setData(it)
         })
+        viewModel.modelLiveData.observe(this, Observer {
+            if (it.second) {
+                (activity as MainActivity).changeFragment(ChapterFragment(it.first), TAG)
+            } else Toast.makeText(context, "PartId ${it.first}", Toast.LENGTH_SHORT).show()
+        })
     }
 
     override fun onItemClick(model: PartModel) {
         viewModel.getChapterScreen(model.id)
-        viewModel.model.observe(this, Observer {
-            if (it == "no") {
-                Toast.makeText(context, model.title, Toast.LENGTH_SHORT).show()
-            }
-            else if(it == "yes") {
-                (activity as MainActivity).changeFragment(ChapterFragment(model.id), TAG)
-            }
-        })
     }
 }
