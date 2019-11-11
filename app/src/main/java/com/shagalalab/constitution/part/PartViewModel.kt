@@ -13,24 +13,23 @@ class PartViewModel(
     private val chapterDao: ChapterDao
 ) : ViewModel() {
     private val partListLiveData: MutableLiveData<List<PartModel>> = MutableLiveData()
-    lateinit var partList: LiveData<List<PartModel>>
+    var partList: LiveData<List<PartModel>> = partListLiveData
     var modelLiveData: MutableLiveData<Pair<Int, Boolean>> = MutableLiveData()
+
     fun getPartsByLangId(langId: Int) {
         Executors.newSingleThreadExecutor().execute {
             partListLiveData.postValue(partDao.getPartsByLanguage(langId))
         }
-        partList = partListLiveData
     }
 
     fun getChapterScreen(id: Int) {
         Executors.newSingleThreadExecutor().execute {
-            if (chapterDao.getChaptersByPartId(id).isNotEmpty()) modelLiveData.postValue(
+            modelLiveData.postValue(
                 Pair(
                     id,
-                    true
+                    chapterDao.getChaptersByPartId(id).isNotEmpty()
                 )
             )
-            else modelLiveData.postValue(Pair(id, false))
         }
     }
 }

@@ -10,11 +10,11 @@ import java.util.concurrent.Executors
 class ChapterViewModel(private val chapterDao: ChapterDao) : ViewModel() {
 
     private val chapterListLiveData: MutableLiveData<List<ChapterModel>> = MutableLiveData()
-    lateinit var chapterList: LiveData<List<ChapterModel>>
+    var chapterList: LiveData<List<ChapterModel>> = chapterListLiveData
+
     fun getChaptersByPartId(partId: Int) {
         Executors.newSingleThreadExecutor().execute {
             chapterListLiveData.postValue(chapterDao.getChaptersByPartId(partId))
         }
-        chapterList = chapterListLiveData
     }
 }

@@ -13,12 +13,14 @@ import com.shagalalab.constitution.data.ConstitutionDatabase
 import com.shagalalab.constitution.data.models.ChapterModel
 import kotlinx.android.synthetic.main.fragment_chapter.*
 
-class ChapterFragment(private val partId: Int) : Fragment(R.layout.fragment_chapter), ItemClickListener {
+class ChapterFragment(private val partId: Int) : Fragment(R.layout.fragment_chapter),
+    ItemClickListener {
 
     private lateinit var viewModel: ChapterViewModel
+    private val adapter = ChapterAdapter(this)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = ChapterAdapter(this)
         list_chapter.adapter = adapter
         list_chapter.addItemDecoration(
             DividerItemDecoration(

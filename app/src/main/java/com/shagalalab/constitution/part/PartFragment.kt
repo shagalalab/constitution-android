@@ -10,7 +10,6 @@ import com.shagalalab.constitution.MainActivity
 import com.shagalalab.constitution.R
 import com.shagalalab.constitution.chapter.ChapterFragment
 import com.shagalalab.constitution.data.ConstitutionDatabase
-import com.shagalalab.constitution.data.models.PartModel
 import com.shagalalab.constitution.part.adapter.ItemClickListener
 import com.shagalalab.constitution.part.adapter.PartAdapter
 import kotlinx.android.synthetic.main.fragment_part.*
@@ -22,10 +21,10 @@ class PartFragment(private var lang: Int) : Fragment(R.layout.fragment_part), It
     }
 
     private lateinit var viewModel: PartViewModel
+    private val adapter = PartAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = PartAdapter(this)
         list.adapter = adapter
         list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         viewModel = PartViewModel(
@@ -39,11 +38,13 @@ class PartFragment(private var lang: Int) : Fragment(R.layout.fragment_part), It
         viewModel.modelLiveData.observe(this, Observer {
             if (it.second) {
                 (activity as MainActivity).changeFragment(ChapterFragment(it.first), TAG)
-            } else Toast.makeText(context, "PartId ${it.first}", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "PartId ${it.first}", Toast.LENGTH_SHORT).show()
+            }
         })
     }
 
-    override fun onItemClick(model: PartModel) {
-        viewModel.getChapterScreen(model.id)
+    override fun onItemClick(id: Int) {
+        viewModel.getChapterScreen(id)
     }
 }

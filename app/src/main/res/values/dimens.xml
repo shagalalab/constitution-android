@@ -7,4 +7,5 @@
     <dimen name="item_height">64dp</dimen>
     <dimen name="title_text_size">18sp</dimen>
     <dimen name="match_constraint">0dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
 </resources>

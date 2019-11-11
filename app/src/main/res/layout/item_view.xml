@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="@dimen/item_height"
-    android:padding="8dp">
+    android:padding="@dimen/small_padding">
 
     <TextView
         android:id="@+id/title_text"

@@ -13,7 +13,7 @@ class PartItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.description_text.text = model.description
         itemView.description_text.isVisible = model.description.isNotEmpty()
         itemView.setOnClickListener {
-            itemClickListener.onItemClick(model)
+            itemClickListener.onItemClick(model.id)
         }
     }
 }
