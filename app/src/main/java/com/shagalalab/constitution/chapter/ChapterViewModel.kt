@@ -10,7 +10,7 @@ import java.util.concurrent.Executors
 class ChapterViewModel(private val chapterDao: ChapterDao) : ViewModel() {
 
     private val chapterListLiveData: MutableLiveData<List<ChapterModel>> = MutableLiveData()
-    var chapterList: LiveData<List<ChapterModel>> = chapterListLiveData
+    val chapterList: LiveData<List<ChapterModel>> = chapterListLiveData
 
     fun getChaptersByPartId(partId: Int) {
         Executors.newSingleThreadExecutor().execute {

@@ -23,19 +23,23 @@ class PartFragment(private var lang: Int) : Fragment(R.layout.fragment_part), It
     private lateinit var viewModel: PartViewModel
     private val adapter = PartAdapter(this)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        list.adapter = adapter
-        list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         viewModel = PartViewModel(
             ConstitutionDatabase.getInstance(requireContext()).partDao(),
             ConstitutionDatabase.getInstance(requireContext()).chapterDao()
         )
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        list.adapter = adapter
+        list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         viewModel.getPartsByLangId(lang)
         viewModel.partList.observe(this, Observer {
             adapter.setData(it)
         })
-        viewModel.modelLiveData.observe(this, Observer {
+        viewModel.chapterClickResult.observe(this, Observer {
             if (it.second) {
                 (activity as MainActivity).changeFragment(ChapterFragment(it.first), TAG)
             } else {
