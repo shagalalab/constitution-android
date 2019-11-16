@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.shagalalab.constitution.MainActivity
-import com.shagalalab.constitution.list.ListFragment
+import com.shagalalab.constitution.part.PartFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
@@ -60,6 +60,6 @@ class MainFragment : Fragment() {
     }
 
     private fun showMessage(lang: Int) {
-        (activity as MainActivity).changeFragment(ListFragment(lang), TAG)
+        (activity as MainActivity).changeFragment(PartFragment(lang), TAG)
     }
 }
