@@ -19,6 +19,13 @@ class ChapterFragment(private val partId: Int) : Fragment(R.layout.fragment_chap
     private val adapter = ChapterAdapter(this)
     private lateinit var viewModel: ChapterViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ChapterViewModel(
+            ConstitutionDatabase.getInstance(requireContext()).chapterDao()
+        )
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         list_chapter.adapter = adapter
@@ -27,9 +34,6 @@ class ChapterFragment(private val partId: Int) : Fragment(R.layout.fragment_chap
                 context,
                 DividerItemDecoration.VERTICAL
             )
-        )
-        viewModel = ChapterViewModel(
-            ConstitutionDatabase.getInstance(requireContext()).chapterDao()
         )
         viewModel.getChaptersByPartId(partId)
         viewModel.chapterList.observe(this, Observer {
