@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/list_article"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/match_constraint"
+        android:scrollbars="vertical"
+        android:textSize="@dimen/title_text_size"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:textColor="@color/black"
+        android:text="TextView" />
+</LinearLayout>
