@@ -37,7 +37,7 @@ class ArticleFragment(private var chapterId: Int) :
                 val st = StyleSpan(Typeface.BOLD)
                 s.append(it.title, st, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 s.append(". ")
-                s.append(it.description)
+                s.append(it.description.replace("\\n", "\n"))
                 s.append("\n")
             }
             textView.text = s
