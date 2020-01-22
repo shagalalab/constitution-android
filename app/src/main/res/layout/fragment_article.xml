@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/textView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/standard_margin"
+    android:layout_weight="1"
     android:background="@color/white"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/match_constraint"
-        android:scrollbars="vertical"
-        android:textSize="@dimen/title_text_size"
-        android:layout_weight="1"
-        android:layout_marginStart="@dimen/standard_margin"
-        android:textColor="@color/black"
-        android:text="TextView" />
-</LinearLayout>
+    android:clickable="true"
+    android:focusable="true"
+    android:scrollbars="vertical"
+    android:text="@string/lang_en"
+    android:textColor="@color/black"
+    android:textSize="@dimen/title_text_size" />

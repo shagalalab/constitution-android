@@ -1,5 +1,9 @@
 package com.shagalalab.constitution.article
 
+import android.graphics.Typeface
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.StyleSpan
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,5 +20,22 @@ class ArticleViewModel(private val articleDao: ArticleDao) : ViewModel() {
         Executors.newSingleThreadExecutor().execute {
             articleListLiveData.postValue(articleDao.getArticlesByChapterId(chapterId))
         }
+    }
+
+    fun normalizedDescription(it: List<ArticleModel>): SpannableStringBuilder {
+        val spannedString = SpannableStringBuilder()
+        it.forEach {
+            spannedString.append(it.title)
+            spannedString.setSpan(
+                StyleSpan(Typeface.BOLD),
+                spannedString.length - it.title.length,
+                spannedString.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            spannedString.append(". ")
+            spannedString.append(it.description.replace("\\n", "\n"))
+            spannedString.append("\n")
+        }
+        return spannedString
     }
 }
