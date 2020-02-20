@@ -2,12 +2,12 @@ package com.shagalalab.constitution.part
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.shagalalab.constitution.MainActivity
 import com.shagalalab.constitution.R
+import com.shagalalab.constitution.article.ArticleFragment
 import com.shagalalab.constitution.chapter.ChapterFragment
 import com.shagalalab.constitution.data.ConstitutionDatabase
 import com.shagalalab.constitution.part.adapter.ItemClickListener
@@ -27,8 +27,15 @@ class PartFragment(private var lang: Int) : Fragment(R.layout.fragment_part), It
         super.onCreate(savedInstanceState)
         viewModel = PartViewModel(
             ConstitutionDatabase.getInstance(requireContext()).partDao(),
-            ConstitutionDatabase.getInstance(requireContext()).chapterDao()
+            ConstitutionDatabase.getInstance(requireContext()).chapterDao(),
+            ConstitutionDatabase.getInstance(requireContext()).articleDao()
         )
+        viewModel.chapterClickResult.observe(this, Observer {
+            (activity as MainActivity).changeFragment(ChapterFragment(it), TAG)
+        })
+        viewModel.preambleClickResult.observe(this, Observer {
+            (activity as MainActivity).changeFragment(ArticleFragment(it, false), TAG)
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,13 +45,6 @@ class PartFragment(private var lang: Int) : Fragment(R.layout.fragment_part), It
         viewModel.getPartsByLangId(lang)
         viewModel.partList.observe(this, Observer {
             adapter.setData(it)
-        })
-        viewModel.chapterClickResult.observe(this, Observer {
-            if (it.second) {
-                (activity as MainActivity).changeFragment(ChapterFragment(it.first), TAG)
-            } else {
-                Toast.makeText(context, "PartId ${it.first}", Toast.LENGTH_SHORT).show()
-            }
         })
     }
 
