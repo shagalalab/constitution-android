@@ -28,9 +28,11 @@ class ArticleFragment(private var chapterId: Int, private var check: Boolean) :
         super.onViewCreated(view, savedInstanceState)
         textView.movementMethod = ScrollingMovementMethod()
         val s = SpannableStringBuilder()
-        if (check)
+        if (check) {
             viewModel.getArticles(chapterId)
-        else viewModel.getArticlesByPartId(chapterId)
+        } else {
+            viewModel.getArticlesByPartId(chapterId)
+        }
         viewModel.articleList.observe(this, Observer { list ->
             list.forEach {
                 s.append(it.normalizedDescription())
