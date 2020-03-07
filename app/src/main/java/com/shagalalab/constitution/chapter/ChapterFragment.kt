@@ -2,11 +2,12 @@ package com.shagalalab.constitution.chapter
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.shagalalab.constitution.MainActivity
 import com.shagalalab.constitution.R
+import com.shagalalab.constitution.article.ArticleFragment
 import com.shagalalab.constitution.chapter.adapter.ChapterAdapter
 import com.shagalalab.constitution.chapter.adapter.ItemClickListener
 import com.shagalalab.constitution.data.ConstitutionDatabase
@@ -15,6 +16,10 @@ import kotlinx.android.synthetic.main.fragment_chapter.*
 
 class ChapterFragment(private val partId: Int) : Fragment(R.layout.fragment_chapter),
     ItemClickListener {
+
+    companion object {
+        const val TAG = "ChapterFragment"
+    }
 
     private val adapter = ChapterAdapter(this)
     private lateinit var viewModel: ChapterViewModel
@@ -42,6 +47,6 @@ class ChapterFragment(private val partId: Int) : Fragment(R.layout.fragment_chap
     }
 
     override fun onItemClick(model: ChapterModel) {
-        Toast.makeText(context, model.title, Toast.LENGTH_SHORT).show()
+        (activity as MainActivity).changeFragment(ArticleFragment(model.id, true), TAG)
     }
 }

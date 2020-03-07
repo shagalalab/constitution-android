@@ -9,4 +9,10 @@ interface ArticleDao {
 
     @Query("SELECT * FROM articles")
     fun getArticles(): List<ArticleModel>
+
+    @Query("SELECT * FROM articles WHERE chapter_id=:chapterId")
+    fun getArticlesByChapterId(chapterId: Int): List<ArticleModel>
+
+    @Query("SELECT * FROM articles WHERE part_id=:partId")
+    fun getArticlesByPartId(partId: Int): List<ArticleModel>
 }
