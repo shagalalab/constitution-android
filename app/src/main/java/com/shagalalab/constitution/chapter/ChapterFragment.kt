@@ -40,7 +40,6 @@ class ChapterFragment(private val partId: Int) : Fragment(R.layout.fragment_chap
                 DividerItemDecoration.VERTICAL
             )
         )
-
         viewModel.getChaptersByPartId(partId)
         viewModel.chapterList.observe(this, Observer {
             adapter.setData(it)
