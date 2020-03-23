@@ -7,8 +7,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
-import com.shagalalab.constitution.R
 import com.shagalalab.constitution.article.adapter.ArticleAdapter
 import com.shagalalab.constitution.data.ConstitutionDatabase
 import kotlinx.android.synthetic.main.fragment_article.*
@@ -26,10 +24,9 @@ class ArticleFragment(private var chapterId: Int, private var check: Boolean) :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModelFactory = ArticleViewModelFactory(ConstitutionDatabase.getInstance(requireContext()).articleDao())
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(ArticleViewModel::class.java)
-/*        viewModel =
-            ArticleViewModel(ConstitutionDatabase.getInstance(requireContext()).articleDao())*/
+        viewModelFactory =
+            ArticleViewModelFactory(ConstitutionDatabase.getInstance(requireContext()).articleDao())
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ArticleViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
