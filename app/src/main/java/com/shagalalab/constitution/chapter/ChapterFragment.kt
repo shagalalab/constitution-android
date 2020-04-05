@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.shagalalab.constitution.MainActivity
 import com.shagalalab.constitution.R
@@ -26,9 +27,10 @@ class ChapterFragment(private val partId: Int) : Fragment(R.layout.fragment_chap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ChapterViewModel(
-            ConstitutionDatabase.getInstance(requireContext()).chapterDao()
-        )
+        viewModel = ViewModelProviders.of(
+            this,
+            ChapterViewModelFactory(ConstitutionDatabase.getInstance(requireContext()).chapterDao())
+        ).get(ChapterViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.shagalalab.constitution.MainActivity
 import com.shagalalab.constitution.R
@@ -25,11 +26,13 @@ class PartFragment(private var lang: Int) : Fragment(R.layout.fragment_part), It
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = PartViewModel(
-            ConstitutionDatabase.getInstance(requireContext()).partDao(),
-            ConstitutionDatabase.getInstance(requireContext()).chapterDao(),
-            ConstitutionDatabase.getInstance(requireContext()).articleDao()
-        )
+        viewModel = ViewModelProviders.of(
+            this, PartViewModelFactory(
+                ConstitutionDatabase.getInstance(requireContext()).partDao(),
+                ConstitutionDatabase.getInstance(requireContext()).chapterDao(),
+                ConstitutionDatabase.getInstance(requireContext()).articleDao()
+            )
+        ).get(PartViewModel::class.java)
         viewModel.chapterClickResult.observe(this, Observer {
             (activity as MainActivity).changeFragment(ChapterFragment(it), TAG)
         })
