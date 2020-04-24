@@ -14,7 +14,7 @@ class ArticleItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     fun populateModel(model: ArticleModel) {
         val s = SpannableStringBuilder()
         val st = StyleSpan(android.graphics.Typeface.BOLD)
-        s.append(model.title, st, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE  )
+        s.append(model.title, st, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         s.append(". ")
         s.append(model.description)
         itemView.title_text.setText(s, TextView.BufferType.NORMAL)

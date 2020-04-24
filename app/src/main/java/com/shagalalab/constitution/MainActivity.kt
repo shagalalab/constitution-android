@@ -2,8 +2,6 @@ package com.shagalalab.constitution
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.shagalalab.constitution.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

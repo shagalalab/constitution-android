@@ -9,9 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.shagalalab.constitution.MainActivity
 import com.shagalalab.constitution.R
-import com.shagalalab.constitution.article.ArticleFragment
 import com.shagalalab.constitution.data.ConstitutionDatabase
 import com.shagalalab.constitution.part.adapter.ItemClickListener
 import com.shagalalab.constitution.part.adapter.PartAdapter
@@ -68,7 +66,7 @@ class PartFragment : Fragment(R.layout.fragment_part), ItemClickListener {
         navController.navigate(action)
     }
 
-    private fun changeToArticleFragment(id: Int){
+    private fun changeToArticleFragment(id: Int) {
         val action = PartFragmentDirections.actionPartFragmentToArticleFragment(id, false)
         navController.navigate(action)
     }
