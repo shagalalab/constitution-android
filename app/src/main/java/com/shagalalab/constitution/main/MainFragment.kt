@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.shagalalab.constitution.MainActivity
-import com.shagalalab.constitution.part.PartFragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
+
+    private lateinit var navController: NavController
 
     companion object {
         const val TAG = "MainFragment"
@@ -33,33 +35,35 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
         en_flag.setOnClickListener {
-            showMessage(EN)
+            chooseLanguage(EN)
         }
         en_text.setOnClickListener {
-            showMessage(EN)
+            chooseLanguage(EN)
         }
         qq_flag.setOnClickListener {
-            showMessage(QQ)
+            chooseLanguage(QQ)
         }
         qq_text.setOnClickListener {
-            showMessage(QQ)
+            chooseLanguage(QQ)
         }
         uz_flag.setOnClickListener {
-            showMessage(UZ)
+            chooseLanguage(UZ)
         }
         uz_text.setOnClickListener {
-            showMessage(UZ)
+            chooseLanguage(UZ)
         }
         ru_flag.setOnClickListener {
-            showMessage(RU)
+            chooseLanguage(RU)
         }
         ru_text.setOnClickListener {
-            showMessage(RU)
+            chooseLanguage(RU)
         }
     }
 
-    private fun showMessage(lang: Int) {
-        (activity as MainActivity).changeFragment(PartFragment(lang), TAG)
+    private fun chooseLanguage(lang: Int) {
+        val action = MainFragmentDirections.actionMainFragmentToPartFragment(lang)
+        navController.navigate(action)
     }
 }

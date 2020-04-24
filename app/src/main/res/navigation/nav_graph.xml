@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.shagalalab.constitution.article.ArticleFragment"
+        android:label="ArticleFragment">
+        <argument
+            android:name="Id"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="check"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/chapterFragment"
+        android:name="com.shagalalab.constitution.chapter.ChapterFragment"
+        android:label="ChapterFragment">
+        <argument
+            android:name="id"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_chapterFragment_to_articleFragment"
+            app:destination="@id/articleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.shagalalab.constitution.main.MainFragment"
+        android:label="MainFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_partFragment"
+            app:destination="@id/partFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/partFragment"
+        android:name="com.shagalalab.constitution.part.PartFragment"
+        android:label="PartFragment">
+        <argument
+            android:name="lang"
+            android:defaultValue="1"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_partFragment_to_chapterFragment"
+            app:destination="@id/chapterFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_partFragment_to_articleFragment"
+            app:destination="@id/articleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+</navigation>

@@ -10,22 +10,22 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        changeFragment(MainFragment(), MainFragment.TAG)
+//        changeFragment(MainFragment(), MainFragment.TAG)
     }
 
-    fun changeFragment(fragment: Fragment, tag: String) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, fragment, tag)
-            .addToBackStack(tag)
-            .commit()
-    }
-
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount == 1) {
-            finish()
-            return
-        }
-        super.onBackPressed()
-    }
+//    private fun changeFragment(fragment: Fragment, tag: String) {
+//        supportFragmentManager
+//            .beginTransaction()
+//            .replace(R.id.container, fragment, tag)
+//            .addToBackStack(tag)
+//            .commit()
+//    }
+//
+//    override fun onBackPressed() {
+//        if (supportFragmentManager.backStackEntryCount == 1) {
+//            finish()
+//            return
+//        }
+//        super.onBackPressed()
+//    }
 }
