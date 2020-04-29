@@ -20,7 +20,6 @@ class ArticleFragment :
     private val safeArgs: ArticleFragmentArgs by navArgs()
     private lateinit var viewModel: ArticleViewModel
     private lateinit var viewModelFactory: ArticleViewModelFactory
-    private val adapter = ArticleAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

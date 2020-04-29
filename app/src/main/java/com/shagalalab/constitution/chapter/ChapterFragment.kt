@@ -13,18 +13,11 @@ import com.shagalalab.constitution.R
 import com.shagalalab.constitution.chapter.adapter.ChapterAdapter
 import com.shagalalab.constitution.chapter.adapter.ItemClickListener
 import com.shagalalab.constitution.data.ConstitutionDatabase
+import com.shagalalab.constitution.data.Language
 import com.shagalalab.constitution.data.models.ChapterModel
 import kotlinx.android.synthetic.main.fragment_chapter.*
 
-class ChapterFragment : Fragment(R.layout.fragment_chapter),
-    ItemClickListener {
-
-    companion object {
-        const val QQ = 1
-        const val RU = 2
-        const val UZ = 3
-        const val EN = 4
-    }
+class ChapterFragment : Fragment(R.layout.fragment_chapter), ItemClickListener {
 
     private var lang = 0
     private var partId = 0
@@ -73,13 +66,12 @@ class ChapterFragment : Fragment(R.layout.fragment_chapter),
     }
 
     private fun chooseTitleLang(langCode: Int): String {
-        var title = ""
-        when (langCode) {
-            QQ -> title = "Статья"
-            RU -> title = "Статья"
-            UZ -> title = "Модда"
-            EN -> title = "Articles"
+        return when (langCode) {
+            Language.QQ.id -> "Статьялар"
+            Language.RU.id -> "Статьи"
+            Language.UZ.id -> "Moddalar"
+            Language.EN.id -> "Articles"
+            else -> ""
         }
-        return title
     }
 }

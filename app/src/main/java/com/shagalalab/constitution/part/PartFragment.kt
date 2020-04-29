@@ -11,19 +11,12 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.shagalalab.constitution.R
 import com.shagalalab.constitution.data.ConstitutionDatabase
+import com.shagalalab.constitution.data.Language
 import com.shagalalab.constitution.part.adapter.ItemClickListener
 import com.shagalalab.constitution.part.adapter.PartAdapter
 import kotlinx.android.synthetic.main.fragment_part.*
 
 class PartFragment : Fragment(R.layout.fragment_part), ItemClickListener {
-
-    companion object {
-        const val TAG = "PartFragment"
-        const val QQ = 1
-        const val RU = 2
-        const val UZ = 3
-        const val EN = 4
-    }
 
     private lateinit var navController: NavController
     private val adapter = PartAdapter(this)
@@ -82,13 +75,12 @@ class PartFragment : Fragment(R.layout.fragment_part), ItemClickListener {
     }
 
     private fun chooseTitleLang(langCode: Int): String {
-        var title = ""
-        when (langCode) {
-            QQ -> title = "Бап"
-            RU -> title = "Глава"
-            UZ -> title = "Bob"
-            EN -> title = "Chapters"
+        return when (langCode) {
+            Language.QQ.id -> "Баплар"
+            Language.RU.id -> "Главы"
+            Language.UZ.id -> "Boblar"
+            Language.EN.id -> "Chapters"
+            else -> ""
         }
-        return title
     }
 }
