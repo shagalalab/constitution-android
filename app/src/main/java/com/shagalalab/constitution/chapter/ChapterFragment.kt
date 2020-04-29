@@ -5,28 +5,31 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.shagalalab.constitution.MainActivity
 import com.shagalalab.constitution.R
-import com.shagalalab.constitution.article.ArticleFragment
 import com.shagalalab.constitution.chapter.adapter.ChapterAdapter
 import com.shagalalab.constitution.chapter.adapter.ItemClickListener
 import com.shagalalab.constitution.data.ConstitutionDatabase
+import com.shagalalab.constitution.data.Language
 import com.shagalalab.constitution.data.models.ChapterModel
 import kotlinx.android.synthetic.main.fragment_chapter.*
 
-class ChapterFragment(private val partId: Int) : Fragment(R.layout.fragment_chapter),
-    ItemClickListener {
+class ChapterFragment : Fragment(R.layout.fragment_chapter), ItemClickListener {
 
-    companion object {
-        const val TAG = "ChapterFragment"
-    }
-
+    private var lang = 0
+    private var partId = 0
     private val adapter = ChapterAdapter(this)
     private lateinit var viewModel: ChapterViewModel
+    private lateinit var navController: NavController
+    private val safeArgs: ChapterFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        lang = safeArgs.lang
+        partId = safeArgs.id
         viewModel = ViewModelProviders.of(
             this,
             ChapterViewModelFactory(ConstitutionDatabase.getInstance(requireContext()).chapterDao())
@@ -35,6 +38,7 @@ class ChapterFragment(private val partId: Int) : Fragment(R.layout.fragment_chap
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
         list_chapter.adapter = adapter
         list_chapter.addItemDecoration(
             DividerItemDecoration(
@@ -43,12 +47,31 @@ class ChapterFragment(private val partId: Int) : Fragment(R.layout.fragment_chap
             )
         )
         viewModel.getChaptersByPartId(partId)
-        viewModel.chapterList.observe(this, Observer {
+        viewModel.chapterList.observe(viewLifecycleOwner, Observer {
             adapter.setData(it)
         })
     }
 
     override fun onItemClick(model: ChapterModel) {
-        (activity as MainActivity).changeFragment(ArticleFragment(model.id, true), TAG)
+        changeToArticleFragment(model.id)
+    }
+
+    private fun changeToArticleFragment(id: Int) {
+        val action = ChapterFragmentDirections.actionChapterFragmentToArticleFragment(
+            chooseTitleLang(lang),
+            id,
+            true
+        )
+        navController.navigate(action)
+    }
+
+    private fun chooseTitleLang(langCode: Int): String {
+        return when (langCode) {
+            Language.QQ.id -> "Статьялар"
+            Language.RU.id -> "Статьи"
+            Language.UZ.id -> "Moddalar"
+            Language.EN.id -> "Articles"
+            else -> ""
+        }
     }
 }
