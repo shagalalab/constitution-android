@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/articleFragment"
         android:name="com.shagalalab.constitution.article.ArticleFragment"
-        android:label="ArticleFragment">
+        android:label="{title}">
+        <argument
+            android:name="title"
+            android:defaultValue="Article"
+            app:argType="string" />
         <argument
             android:name="Id"
             android:defaultValue="0"
@@ -20,10 +24,19 @@
     <fragment
         android:id="@+id/chapterFragment"
         android:name="com.shagalalab.constitution.chapter.ChapterFragment"
-        android:label="ChapterFragment">
+        android:label="{title}">
+        <argument
+            android:name="title"
+            android:defaultValue="Chapter"
+            app:argType="string" />
         <argument
             android:name="id"
             android:defaultValue="0"
+            app:argType="integer" />
+
+        <argument
+            android:name="lang"
+            android:defaultValue="1"
             app:argType="integer" />
         <action
             android:id="@+id/action_chapterFragment_to_articleFragment"
@@ -36,7 +49,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.shagalalab.constitution.main.MainFragment"
-        android:label="MainFragment">
+        android:label="qqConstitution">
         <action
             android:id="@+id/action_mainFragment_to_partFragment"
             app:destination="@id/partFragment"
@@ -48,7 +61,7 @@
     <fragment
         android:id="@+id/partFragment"
         android:name="com.shagalalab.constitution.part.PartFragment"
-        android:label="PartFragment">
+        android:label="{title}">
         <argument
             android:name="lang"
             android:defaultValue="1"
@@ -67,5 +80,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="title"
+            android:defaultValue="Part"
+            app:argType="string" />
     </fragment>
 </navigation>

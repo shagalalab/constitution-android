@@ -14,7 +14,6 @@ class MainFragment : Fragment() {
     private lateinit var navController: NavController
 
     companion object {
-        const val TAG = "MainFragment"
         const val QQ = 1
         const val RU = 2
         const val UZ = 3
@@ -63,7 +62,14 @@ class MainFragment : Fragment() {
     }
 
     private fun chooseLanguage(lang: Int) {
-        val action = MainFragmentDirections.actionMainFragmentToPartFragment(lang)
+        var title = ""
+        when (lang) {
+            QQ -> title = "Тараў"
+            RU -> title = "Раздел"
+            UZ -> title = "Bo`lim"
+            EN -> title = "Parts"
+        }
+        val action = MainFragmentDirections.actionMainFragmentToPartFragment(lang, title)
         navController.navigate(action)
     }
 }

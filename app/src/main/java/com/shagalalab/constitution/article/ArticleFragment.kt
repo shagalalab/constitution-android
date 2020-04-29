@@ -15,10 +15,6 @@ import kotlinx.android.synthetic.main.fragment_article.*
 class ArticleFragment :
     Fragment(com.shagalalab.constitution.R.layout.fragment_article) {
 
-    companion object {
-        const val TAG = "ArticleFragment"
-    }
-
     private var chapterId = 0
     private var check = false
     private val safeArgs: ArticleFragmentArgs by navArgs()

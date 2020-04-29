@@ -2,28 +2,21 @@ package com.shagalalab.constitution
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        changeFragment(MainFragment(), MainFragment.TAG)
-    }
 
-//    private fun changeFragment(fragment: Fragment, tag: String) {
-//        supportFragmentManager
-//            .beginTransaction()
-//            .replace(R.id.container, fragment, tag)
-//            .addToBackStack(tag)
-//            .commit()
-//    }
-//
-//    override fun onBackPressed() {
-//        if (supportFragmentManager.backStackEntryCount == 1) {
-//            finish()
-//            return
-//        }
-//        super.onBackPressed()
-//    }
+        val navController = findNavController(container)
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        findViewById<Toolbar>(R.id.toolbar)
+            .setupWithNavController(navController, appBarConfiguration)
+    }
 }

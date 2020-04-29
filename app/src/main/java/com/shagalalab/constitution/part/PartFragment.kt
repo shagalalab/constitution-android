@@ -19,6 +19,10 @@ class PartFragment : Fragment(R.layout.fragment_part), ItemClickListener {
 
     companion object {
         const val TAG = "PartFragment"
+        const val QQ = 1
+        const val RU = 2
+        const val UZ = 3
+        const val EN = 4
     }
 
     private lateinit var navController: NavController
@@ -38,11 +42,9 @@ class PartFragment : Fragment(R.layout.fragment_part), ItemClickListener {
         ).get(PartViewModel::class.java)
         viewModel.chapterClickResult.observe(this, Observer {
             changeToChapterFragment(it)
-//            (activity as MainActivity).changeFragment(ChapterFragment(it), TAG)
         })
         viewModel.preambleClickResult.observe(this, Observer {
             changeToArticleFragment(it)
-//            (activity as MainActivity).changeFragment(ArticleFragment(it, false), TAG)
         })
     }
 
@@ -62,12 +64,31 @@ class PartFragment : Fragment(R.layout.fragment_part), ItemClickListener {
     }
 
     private fun changeToChapterFragment(id: Int) {
-        val action = PartFragmentDirections.actionPartFragmentToChapterFragment(id)
+        val action = PartFragmentDirections.actionPartFragmentToChapterFragment(
+            chooseTitleLang(lang),
+            id,
+            lang
+        )
         navController.navigate(action)
     }
 
     private fun changeToArticleFragment(id: Int) {
-        val action = PartFragmentDirections.actionPartFragmentToArticleFragment(id, false)
+        val action = PartFragmentDirections.actionPartFragmentToArticleFragment(
+            chooseTitleLang(lang),
+            id,
+            false
+        )
         navController.navigate(action)
+    }
+
+    private fun chooseTitleLang(langCode: Int): String {
+        var title = ""
+        when (langCode) {
+            QQ -> title = "Бап"
+            RU -> title = "Глава"
+            UZ -> title = "Bob"
+            EN -> title = "Chapters"
+        }
+        return title
     }
 }

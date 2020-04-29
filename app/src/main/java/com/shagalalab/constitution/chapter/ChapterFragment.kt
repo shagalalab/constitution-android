@@ -20,9 +20,13 @@ class ChapterFragment : Fragment(R.layout.fragment_chapter),
     ItemClickListener {
 
     companion object {
-        const val TAG = "ChapterFragment"
+        const val QQ = 1
+        const val RU = 2
+        const val UZ = 3
+        const val EN = 4
     }
 
+    private var lang = 0
     private var partId = 0
     private val adapter = ChapterAdapter(this)
     private lateinit var viewModel: ChapterViewModel
@@ -31,6 +35,7 @@ class ChapterFragment : Fragment(R.layout.fragment_chapter),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        lang = safeArgs.lang
         partId = safeArgs.id
         viewModel = ViewModelProviders.of(
             this,
@@ -56,11 +61,25 @@ class ChapterFragment : Fragment(R.layout.fragment_chapter),
 
     override fun onItemClick(model: ChapterModel) {
         changeToArticleFragment(model.id)
-//        (activity as MainActivity).changeFragment(ArticleFragment(model.id, true), TAG)
     }
 
     private fun changeToArticleFragment(id: Int) {
-        val action = ChapterFragmentDirections.actionChapterFragmentToArticleFragment(id, true)
+        val action = ChapterFragmentDirections.actionChapterFragmentToArticleFragment(
+            chooseTitleLang(lang),
+            id,
+            true
+        )
         navController.navigate(action)
+    }
+
+    private fun chooseTitleLang(langCode: Int): String {
+        var title = ""
+        when (langCode) {
+            QQ -> title = "Статья"
+            RU -> title = "Статья"
+            UZ -> title = "Модда"
+            EN -> title = "Articles"
+        }
+        return title
     }
 }
