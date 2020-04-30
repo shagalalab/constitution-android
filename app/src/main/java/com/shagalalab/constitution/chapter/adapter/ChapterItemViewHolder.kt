@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shagalalab.constitution.data.models.ChapterModel
 import kotlinx.android.synthetic.main.item_view.view.*
 
-class ChapterItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ChapterItemViewHolder(itemView: View, private val itemClickListener: ItemClickListener) :
+    RecyclerView.ViewHolder(itemView) {
 
-    fun populateModel(model: ChapterModel, itemClickListener: ItemClickListener) {
+    fun populateModel(model: ChapterModel) {
         itemView.title_text.text = model.title
         itemView.description_text.text = model.description
         itemView.description_text.isVisible = model.description.isNotEmpty()

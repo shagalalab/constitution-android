@@ -11,21 +11,21 @@ class ChapterAdapter(private val itemClickListener: ItemClickListener) :
 
     private var models: List<ChapterModel> = arrayListOf()
 
-    fun setData(models: List<ChapterModel>) {
-        this.models = models
-        notifyDataSetChanged()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChapterItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_view, parent, false)
-        return ChapterItemViewHolder(view)
+        return ChapterItemViewHolder(view, itemClickListener)
+    }
+
+    override fun onBindViewHolder(holder: ChapterItemViewHolder, position: Int) {
+        holder.populateModel(models[position])
     }
 
     override fun getItemCount(): Int {
         return models.size
     }
 
-    override fun onBindViewHolder(holder: ChapterItemViewHolder, position: Int) {
-        holder.populateModel(models[position], itemClickListener)
+    fun setData(models: List<ChapterModel>) {
+        this.models = models
+        notifyDataSetChanged()
     }
 }

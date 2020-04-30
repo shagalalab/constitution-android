@@ -17,6 +17,7 @@
         android:id="@+id/qq_flag"
         android:layout_width="@dimen/flag_size"
         android:layout_height="@dimen/flag_size"
+        android:contentDescription="@string/lang_qq"
         android:src="@drawable/qq"
         app:layout_constraintBottom_toTopOf="@id/qq_text"
         app:layout_constraintEnd_toStartOf="@id/ru_flag"
@@ -36,6 +37,7 @@
         android:id="@+id/ru_flag"
         android:layout_width="@dimen/flag_size"
         android:layout_height="@dimen/flag_size"
+        android:contentDescription="@string/lang_ru"
         android:src="@drawable/ru"
         app:layout_constraintBottom_toTopOf="@id/ru_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +57,8 @@
         android:id="@+id/uz_flag"
         android:layout_width="@dimen/flag_size"
         android:layout_height="@dimen/flag_size"
-        android:layout_marginTop="@dimen/big_margin"
+        android:layout_marginTop="@dimen/margin_large"
+        android:contentDescription="@string/lang_uz"
         android:src="@drawable/uz"
         app:layout_constraintEnd_toStartOf="@id/en_flag"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +78,8 @@
         android:id="@+id/en_flag"
         android:layout_width="@dimen/flag_size"
         android:layout_height="@dimen/flag_size"
-        android:layout_marginTop="@dimen/big_margin"
+        android:layout_marginTop="@dimen/margin_large"
+        android:contentDescription="@string/lang_en"
         android:src="@drawable/en"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/uz_flag"
@@ -90,4 +94,5 @@
         app:layout_constraintEnd_toEndOf="@id/en_flag"
         app:layout_constraintStart_toStartOf="@id/en_flag"
         app:layout_constraintTop_toBottomOf="@id/en_flag" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

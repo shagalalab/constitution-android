@@ -6,14 +6,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shagalalab.constitution.data.models.PartModel
 import kotlinx.android.synthetic.main.item_view.view.*
 
-class PartItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class PartItemViewHolder(itemView: View, private val itemClickListener: ItemClickListener) :
+    RecyclerView.ViewHolder(itemView) {
 
-    fun populateModel(model: PartModel, itemClickListener: ItemClickListener) {
-        itemView.title_text.text = model.title
-        itemView.description_text.text = model.description
-        itemView.description_text.isVisible = model.description.isNotEmpty()
-        itemView.setOnClickListener {
-            itemClickListener.onItemClick(model.id)
+    fun populateModel(model: PartModel) {
+        itemView.apply {
+            title_text.text = model.title
+            description_text.text = model.description
+            description_text.isVisible = model.description.isNotEmpty()
+            setOnClickListener {
+                itemClickListener.onItemClick(model.id)
+            }
         }
     }
 }

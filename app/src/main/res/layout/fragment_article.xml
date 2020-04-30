@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/small_padding"
-        android:layout_marginEnd="@dimen/small_padding"
-        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/margin_standard"
+        android:paddingEnd="@dimen/margin_standard"
+        android:paddingTop="@dimen/margin_standard"
         android:scrollbars="vertical"
         android:text="@string/lang_en"
         android:textColor="@color/black"
-        android:textSize="@dimen/title_text_size" />
+        android:textSize="@dimen/text_size" />
+
 </ScrollView>

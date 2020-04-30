@@ -19,26 +19,30 @@ import kotlinx.android.synthetic.main.fragment_chapter.*
 
 class ChapterFragment : Fragment(R.layout.fragment_chapter), ItemClickListener {
 
-    private var lang = 0
-    private var partId = 0
+    private val safeArgs: ChapterFragmentArgs by navArgs()
+    private val lang by lazy { safeArgs.lang }
+    private val partId by lazy { safeArgs.id }
     private val adapter = ChapterAdapter(this)
+    private val viewModelFactory by lazy {
+        ChapterViewModelFactory(ConstitutionDatabase.getInstance(requireContext()).chapterDao())
+    }
+
     private lateinit var viewModel: ChapterViewModel
     private lateinit var navController: NavController
-    private val safeArgs: ChapterFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lang = safeArgs.lang
-        partId = safeArgs.id
-        viewModel = ViewModelProviders.of(
-            this,
-            ChapterViewModelFactory(ConstitutionDatabase.getInstance(requireContext()).chapterDao())
-        ).get(ChapterViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ChapterViewModel::class.java)
+        viewModel.getChaptersByPartId(partId)
+        viewModel.chapterList.observe(this, Observer {
+            adapter.setData(it)
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+
         list_chapter.adapter = adapter
         list_chapter.addItemDecoration(
             DividerItemDecoration(
@@ -46,20 +50,12 @@ class ChapterFragment : Fragment(R.layout.fragment_chapter), ItemClickListener {
                 DividerItemDecoration.VERTICAL
             )
         )
-        viewModel.getChaptersByPartId(partId)
-        viewModel.chapterList.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
-        })
     }
 
     override fun onItemClick(model: ChapterModel) {
-        changeToArticleFragment(model.id)
-    }
-
-    private fun changeToArticleFragment(id: Int) {
         val action = ChapterFragmentDirections.actionChapterFragmentToArticleFragment(
             chooseTitleLang(lang),
-            id,
+            model.id,
             true
         )
         navController.navigate(action)
