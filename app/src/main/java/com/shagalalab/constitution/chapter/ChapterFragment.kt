@@ -43,8 +43,8 @@ class ChapterFragment : Fragment(R.layout.fragment_chapter), ItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        list_chapter.adapter = adapter
-        list_chapter.addItemDecoration(
+        chapters_list.adapter = adapter
+        chapters_list.addItemDecoration(
             DividerItemDecoration(
                 context,
                 DividerItemDecoration.VERTICAL

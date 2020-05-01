@@ -14,7 +14,7 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:text="@string/title"
-        android:textColor="@color/black"
+        android:textColor="@android:color/black"
         android:textSize="@dimen/title_text_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/description_text"

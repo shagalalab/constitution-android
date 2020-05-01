@@ -35,7 +35,7 @@ data class ArticleModel(
 ) {
     fun normalizedDescription(): SpannableStringBuilder {
         val spannedString = SpannableStringBuilder()
-        if (title != "") {
+        if (title.isNotEmpty()) {
             spannedString.append(title)
             spannedString.setSpan(
                 StyleSpan(Typeface.BOLD),
@@ -46,7 +46,7 @@ data class ArticleModel(
             spannedString.append(". ")
         }
         spannedString.append(description.replace("\\n", "\n"))
-        spannedString.append("\n")
+        spannedString.append("\n\n")
         return spannedString
     }
 }
