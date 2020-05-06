@@ -1,4 +1,4 @@
-package com.shagalalab.constitution.injectors
+package com.shagalalab.constitution.di
 
 import androidx.room.Room
 import com.shagalalab.constitution.article.ArticleViewModel

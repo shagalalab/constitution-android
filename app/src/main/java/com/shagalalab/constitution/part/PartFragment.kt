@@ -27,7 +27,7 @@ class PartFragment : Fragment(R.layout.fragment_part), ItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.apply {
-            getPartsByLangId(lang)
+            getPartsByLangId(lang + 1)
             chapterClickResult.observe(this@PartFragment, Observer {
                 changeToChapterFragment(it)
             })
@@ -63,11 +63,21 @@ class PartFragment : Fragment(R.layout.fragment_part), ItemClickListener {
 
     private fun changeToArticleFragment(id: Int) {
         val action = PartFragmentDirections.actionPartFragmentToArticleFragment(
-            chooseTitleLang(lang),
+            chooseArticleTitleLang(lang),
             id,
             false
         )
         navController.navigate(action)
+    }
+
+    private fun chooseArticleTitleLang(langCode: Int): String {
+        return when (langCode) {
+            Language.QQ.ordinal -> "Статьялар"
+            Language.RU.ordinal -> "Статьи"
+            Language.UZ.ordinal -> "Moddalar"
+            Language.EN.ordinal -> "Articles"
+            else -> ""
+        }
     }
 
     private fun chooseTitleLang(langCode: Int): String {
