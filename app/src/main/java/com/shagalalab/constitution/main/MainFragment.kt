@@ -1,9 +1,7 @@
 package com.shagalalab.constitution.main
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -11,55 +9,48 @@ import com.shagalalab.constitution.R
 import com.shagalalab.constitution.data.Language
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(R.layout.fragment_main) {
 
     private lateinit var navController: NavController
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         en_flag.setOnClickListener {
-            chooseLanguage(Language.EN)
+            chooseLanguage(Language.EN.ordinal)
         }
         en_text.setOnClickListener {
-            chooseLanguage(Language.EN)
+            chooseLanguage(Language.EN.ordinal)
         }
         qq_flag.setOnClickListener {
-            chooseLanguage(Language.QQ)
+            chooseLanguage(Language.QQ.ordinal)
         }
         qq_text.setOnClickListener {
-            chooseLanguage(Language.QQ)
+            chooseLanguage(Language.QQ.ordinal)
         }
         uz_flag.setOnClickListener {
-            chooseLanguage(Language.UZ)
+            chooseLanguage(Language.UZ.ordinal)
         }
         uz_text.setOnClickListener {
-            chooseLanguage(Language.UZ)
+            chooseLanguage(Language.UZ.ordinal)
         }
         ru_flag.setOnClickListener {
-            chooseLanguage(Language.RU)
+            chooseLanguage(Language.RU.ordinal)
         }
         ru_text.setOnClickListener {
-            chooseLanguage(Language.RU)
+            chooseLanguage(Language.RU.ordinal)
         }
     }
 
-    private fun chooseLanguage(lang: Language) {
+    private fun chooseLanguage(lang: Int) {
         val title = when (lang) {
-            Language.QQ -> "Тараўлар"
-            Language.RU -> "Разделы"
-            Language.UZ -> "Bo`limlar"
-            Language.EN -> "Parts"
+            Language.QQ.ordinal -> "Тараўлар"
+            Language.RU.ordinal -> "Разделы"
+            Language.UZ.ordinal -> "Bo`limlar"
+            Language.EN.ordinal -> "Parts"
+            else -> ""
         }
-        val action = MainFragmentDirections.actionMainFragmentToPartFragment(lang.id, title)
+        val action = MainFragmentDirections.actionMainFragmentToPartFragment(lang, title)
         navController.navigate(action)
     }
 }

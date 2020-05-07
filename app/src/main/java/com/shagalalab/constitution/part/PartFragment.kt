@@ -4,38 +4,30 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.shagalalab.constitution.R
-import com.shagalalab.constitution.data.ConstitutionDatabase
 import com.shagalalab.constitution.data.Language
 import com.shagalalab.constitution.part.adapter.ItemClickListener
 import com.shagalalab.constitution.part.adapter.PartAdapter
 import kotlinx.android.synthetic.main.fragment_part.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PartFragment : Fragment(R.layout.fragment_part), ItemClickListener {
 
     private val safeArgs: PartFragmentArgs by navArgs()
     private val lang by lazy { safeArgs.lang }
     private val adapter = PartAdapter(this)
-    private val viewModelFactory by lazy {
-        PartViewModelFactory(
-            ConstitutionDatabase.getInstance(requireContext()).partDao(),
-            ConstitutionDatabase.getInstance(requireContext()).chapterDao()
-        )
-    }
 
     private lateinit var navController: NavController
-    private lateinit var viewModel: PartViewModel
+    private val viewModel: PartViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(PartViewModel::class.java)
         viewModel.apply {
-            getPartsByLangId(lang)
+            getPartsByLangId(lang + 1)
             chapterClickResult.observe(this@PartFragment, Observer {
                 changeToChapterFragment(it)
             })
@@ -71,19 +63,29 @@ class PartFragment : Fragment(R.layout.fragment_part), ItemClickListener {
 
     private fun changeToArticleFragment(id: Int) {
         val action = PartFragmentDirections.actionPartFragmentToArticleFragment(
-            chooseTitleLang(lang),
+            chooseArticleTitleLang(lang),
             id,
             false
         )
         navController.navigate(action)
     }
 
+    private fun chooseArticleTitleLang(langCode: Int): String {
+        return when (langCode) {
+            Language.QQ.ordinal -> "Статьялар"
+            Language.RU.ordinal -> "Статьи"
+            Language.UZ.ordinal -> "Moddalar"
+            Language.EN.ordinal -> "Articles"
+            else -> ""
+        }
+    }
+
     private fun chooseTitleLang(langCode: Int): String {
         return when (langCode) {
-            Language.QQ.id -> "Баплар"
-            Language.RU.id -> "Главы"
-            Language.UZ.id -> "Boblar"
-            Language.EN.id -> "Chapters"
+            Language.QQ.ordinal -> "Баплар"
+            Language.RU.ordinal -> "Главы"
+            Language.UZ.ordinal -> "Boblar"
+            Language.EN.ordinal -> "Chapters"
             else -> ""
         }
     }
