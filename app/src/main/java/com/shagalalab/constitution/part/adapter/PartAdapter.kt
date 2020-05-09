@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shagalalab.constitution.R
 import com.shagalalab.constitution.data.models.PartModel
 
-class PartAdapter(private val itemClickListener: ItemClickListener) :
+class PartAdapter :
     RecyclerView.Adapter<PartItemViewHolder>() {
 
     private var models: List<PartModel> = arrayListOf()
@@ -16,10 +16,18 @@ class PartAdapter(private val itemClickListener: ItemClickListener) :
         notifyDataSetChanged()
     }
 
+    private var onItemClick = { _: Int ->
+
+    }
+
+    fun setOnClick(modelId: (Int) -> Unit) {
+        this.onItemClick = modelId
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PartItemViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_view, parent, false)
-        return PartItemViewHolder(view, itemClickListener)
+        return PartItemViewHolder(view, onItemClick)
     }
 
     override fun onBindViewHolder(holder: PartItemViewHolder, position: Int) {
