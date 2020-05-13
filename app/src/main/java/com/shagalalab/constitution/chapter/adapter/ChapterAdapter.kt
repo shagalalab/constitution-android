@@ -11,9 +11,7 @@ class ChapterAdapter :
 
     private var models: List<ChapterModel> = arrayListOf()
 
-    private var itemClick = { model: ChapterModel ->
-
-    }
+    private lateinit var itemClick: (ChapterModel) -> Unit
 
     fun setItemClick(itemCLick: (model: ChapterModel) -> Unit) {
         this.itemClick = itemCLick

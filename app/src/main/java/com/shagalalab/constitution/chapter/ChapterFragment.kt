@@ -37,7 +37,6 @@ class ChapterFragment : Fragment(R.layout.fragment_chapter) {
                 true
             )
             navController.navigate(action)
-
         }
     }
 

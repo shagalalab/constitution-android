@@ -17,7 +17,6 @@ class PartItemViewHolder(itemView: View, private val itemClickListener: (itemId:
             setOnClickListener {
                 itemClickListener.invoke(model.id)
             }
-
         }
     }
 }

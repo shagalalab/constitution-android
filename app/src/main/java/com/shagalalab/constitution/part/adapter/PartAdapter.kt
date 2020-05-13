@@ -16,9 +16,7 @@ class PartAdapter :
         notifyDataSetChanged()
     }
 
-    private var onItemClick = { _: Int ->
-
-    }
+    private lateinit var onItemClick: (Int) -> Unit
 
     fun setOnClick(modelId: (Int) -> Unit) {
         this.onItemClick = modelId
