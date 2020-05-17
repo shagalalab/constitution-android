@@ -13,4 +13,7 @@ interface PartDao {
 
     @Query("SELECT * FROM parts WHERE lang_id=:langId")
     fun getPartsByLanguage(langId: Int): List<PartModel>
+
+    @Query("SELECT * FROM parts WHERE id=:id")
+    fun getPartsById(id: Int): PartModel
 }
