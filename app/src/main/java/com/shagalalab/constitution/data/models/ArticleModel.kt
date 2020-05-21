@@ -49,4 +49,31 @@ data class ArticleModel(
         spannedString.append("\n\n")
         return spannedString
     }
+
+    companion object {
+        const val maxWords = 5
+    }
+
+    fun foundArticle(word: String): SpannableStringBuilder {
+        val spannedString = SpannableStringBuilder()
+        description = description.replace("\\n", "\n")
+        val index = description.indexOf(word, 0, true)
+        var count = 0
+        var startIndex = description.lastIndexOf(" ", index)
+        var endIndex = description.indexOf(" ", index)
+        while (count != maxWords && startIndex != -1) {
+            count += 1
+            startIndex = description.lastIndexOf(" ", startIndex - 1)
+        }
+        count = 0
+        while (count != maxWords && endIndex != -1) {
+            count += 1
+            endIndex = description.indexOf(" ", endIndex + 1)
+        }
+        if (endIndex == -1) endIndex = description.length
+        if (startIndex == -1) startIndex = 0
+        spannedString.append("...${description.substring(startIndex, endIndex)}...")
+        return spannedString
+    }
 }
+

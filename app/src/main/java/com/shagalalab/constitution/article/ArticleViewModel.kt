@@ -23,4 +23,10 @@ class ArticleViewModel(private val articleDao: ArticleDao) : ViewModel() {
             articleListLiveData.postValue(articleDao.getArticlesByPartId(chapterId))
         }
     }
+
+    fun findArticlesByWord(word: String) {
+        Executors.newSingleThreadExecutor().execute {
+            articleListLiveData.postValue(articleDao.findArticleByWord("%$word%"))
+        }
+    }
 }

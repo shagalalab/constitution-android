@@ -17,6 +17,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/partFragment"
@@ -46,6 +49,9 @@
             android:name="title"
             android:defaultValue="Parts"
             app:argType="string" />
+        <action
+            android:id="@+id/action_partFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/chapterFragment"
@@ -72,6 +78,9 @@
             android:name="lang"
             android:defaultValue="1"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_chapterFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/articleFragment"
@@ -89,5 +98,17 @@
             android:name="check"
             android:defaultValue="false"
             app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.shagalalab.constitution.search.SearchResultFragment"
+        android:label="SearchResultFragment">
+
+        <argument
+            android:name="query"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_searchResultFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
 </navigation>

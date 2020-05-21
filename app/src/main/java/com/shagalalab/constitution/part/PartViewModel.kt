@@ -16,6 +16,9 @@ class PartViewModel(
     private val partListLiveData: MutableLiveData<List<PartModel>> = MutableLiveData()
     val partList: LiveData<List<PartModel>> = partListLiveData
 
+    private val partLiveData: MutableLiveData<PartModel> = MutableLiveData()
+    val part: LiveData<PartModel> = partLiveData
+
     private val chapterClickResultLiveData: MutableLiveData<Int> = MutableLiveData()
     val chapterClickResult: LiveData<Int> = chapterClickResultLiveData
 
@@ -25,6 +28,12 @@ class PartViewModel(
     fun getPartsByLangId(langId: Int) {
         Executors.newSingleThreadExecutor().execute {
             partListLiveData.postValue(partDao.getPartsByLanguage(langId))
+        }
+    }
+
+    fun getPartById(id: Int) {
+        Executors.newSingleThreadExecutor().execute {
+            partLiveData.postValue(partDao.getPartsById(id))
         }
     }
 

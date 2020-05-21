@@ -20,6 +20,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/resultsList"
         android:layout_width="@dimen/match_constraint"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_height="@dimen/match_constraint"
         android:padding="@dimen/margin_standard_half"
         app:layout_constraintBottom_toBottomOf="parent"
