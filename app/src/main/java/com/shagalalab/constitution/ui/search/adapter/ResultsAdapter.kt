@@ -1,4 +1,4 @@
-package com.shagalalab.constitution.search.adapter
+package com.shagalalab.constitution.ui.search.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +26,6 @@ class ResultsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-
     private lateinit var itemClick: (ArticleItem) -> Unit
 
     fun setItemClick(itemCLick: (model: ArticleItem) -> Unit) {
@@ -46,6 +45,4 @@ class ResultsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemCount(): Int = models.size
-
-
 }

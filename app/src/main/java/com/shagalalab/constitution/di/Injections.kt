@@ -1,10 +1,10 @@
 package com.shagalalab.constitution.di
 
 import androidx.room.Room
-import com.shagalalab.constitution.article.ArticleViewModel
-import com.shagalalab.constitution.chapter.ChapterViewModel
 import com.shagalalab.constitution.data.ConstitutionDatabase
-import com.shagalalab.constitution.part.PartViewModel
+import com.shagalalab.constitution.ui.article.ArticleViewModel
+import com.shagalalab.constitution.ui.chapter.ChapterViewModel
+import com.shagalalab.constitution.ui.part.PartViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

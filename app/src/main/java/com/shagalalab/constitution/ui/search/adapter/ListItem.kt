@@ -1,4 +1,4 @@
-package com.shagalalab.constitution.search.adapter
+package com.shagalalab.constitution.ui.search.adapter
 
 open class ListItem(var type: Int) {
     companion object {

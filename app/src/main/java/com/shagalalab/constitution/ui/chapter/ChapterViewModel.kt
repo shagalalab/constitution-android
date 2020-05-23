@@ -1,4 +1,4 @@
-package com.shagalalab.constitution.chapter
+package com.shagalalab.constitution.ui.chapter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -24,6 +24,12 @@ class ChapterViewModel(private val chapterDao: ChapterDao) : ViewModel() {
     fun getChapterById(id: Int) {
         Executors.newSingleThreadExecutor().execute {
             chapterViewModel.postValue(chapterDao.getChapterById(id))
+        }
+    }
+
+    fun getAllChapters() {
+        Executors.newSingleThreadExecutor().execute {
+            chapterListLiveData.postValue(chapterDao.getChapters())
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.shagalalab.constitution.part
+package com.shagalalab.constitution.ui.part
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -44,6 +44,12 @@ class PartViewModel(
             } else {
                 preambleClickResultLiveData.postValue(id)
             }
+        }
+    }
+
+    fun getAllParts() {
+        Executors.newSingleThreadExecutor().execute {
+            partListLiveData.postValue(partDao.getParts())
         }
     }
 }

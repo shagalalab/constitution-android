@@ -1,8 +1,10 @@
 package com.shagalalab.constitution.data.models
 
+import android.graphics.Color
 import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -57,6 +59,8 @@ data class ArticleModel(
     fun foundArticle(word: String): SpannableStringBuilder {
         val spannedString = SpannableStringBuilder()
         description = description.replace("\\n", "\n")
+        val foundWord = SpannableStringBuilder()
+        foundWord.append(description)
         val index = description.indexOf(word, 0, true)
         var count = 0
         var startIndex = description.lastIndexOf(" ", index)
@@ -72,8 +76,26 @@ data class ArticleModel(
         }
         if (endIndex == -1) endIndex = description.length
         if (startIndex == -1) startIndex = 0
-        spannedString.append("...${description.substring(startIndex, endIndex)}...")
+        spannedString.append("${description.substring(startIndex, endIndex)}")
+        spannedString.setSpan(
+            StyleSpan(Typeface.BOLD),
+            index - startIndex,
+            index - startIndex + word.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannedString.setSpan(
+            ForegroundColorSpan(Color.BLACK),
+            index - startIndex,
+            index - startIndex + word.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         return spannedString
     }
-}
 
+    fun selectedArticle(word: String): String {
+        description = description.replace("\\n", "\n")
+        description =
+            description.replace(word, "<span style=\"background-color: #ffd600\"> $word</span>")
+        return description
+    }
+}

@@ -1,4 +1,4 @@
-package com.shagalalab.constitution.article
+package com.shagalalab.constitution.ui.article
 
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -24,7 +24,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
         textView.movementMethod = ScrollingMovementMethod()
         val s = SpannableStringBuilder()
         if (check) {
-            viewModel.getArticles(chapterId)
+            viewModel.getArticlesByChapterId(chapterId)
         } else {
             viewModel.getArticlesByPartId(chapterId)
         }

@@ -1,4 +1,4 @@
-package com.shagalalab.constitution.search.adapter
+package com.shagalalab.constitution.ui.search.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

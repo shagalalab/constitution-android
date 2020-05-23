@@ -1,4 +1,4 @@
-package com.shagalalab.constitution.part.adapter
+package com.shagalalab.constitution.ui.part.adapter
 
 import android.view.View
 import androidx.core.view.isVisible
