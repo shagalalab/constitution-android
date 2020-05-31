@@ -25,7 +25,6 @@ class PartFragment : SearchableFragment(R.layout.fragment_part) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
 
         viewModel.apply {
             getPartsByLangId(lang + 1)
@@ -47,9 +46,11 @@ class PartFragment : SearchableFragment(R.layout.fragment_part) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         navController = Navigation.findNavController(view)
         parts_list.adapter = adapter
         parts_list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+
         setSubmitText {
             val action = PartFragmentDirections.actionPartFragmentToSearchResultFragment(it!!)
             navController.navigate(action)

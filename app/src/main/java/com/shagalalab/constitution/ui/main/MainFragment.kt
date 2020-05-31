@@ -6,20 +6,12 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.shagalalab.constitution.R
 import com.shagalalab.constitution.data.Language
-import com.shagalalab.constitution.ui.article.ArticleViewModel
 import com.shagalalab.constitution.ui.base.SearchableFragment
 import kotlinx.android.synthetic.main.fragment_main.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : SearchableFragment(R.layout.fragment_main) {
 
     private lateinit var navController: NavController
-    private val viewModel: ArticleViewModel by viewModel()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        setHasOptionsMenu(true)
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -25,7 +25,6 @@ class ChapterFragment : SearchableFragment(R.layout.fragment_chapter) {
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
         viewModel.getChaptersByPartId(partId)
         viewModel.chapterList.observe(this, Observer {
