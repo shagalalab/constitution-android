@@ -52,8 +52,10 @@ class PartFragment : SearchableFragment(R.layout.fragment_part) {
         parts_list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
         setSubmitText {
-            val action = PartFragmentDirections.actionPartFragmentToSearchResultFragment(it!!)
-            navController.navigate(action)
+            if (it.isNotEmpty()) {
+                val action = PartFragmentDirections.actionPartFragmentToSearchResultFragment(it)
+                navController.navigate(action)
+            }
         }
     }
 

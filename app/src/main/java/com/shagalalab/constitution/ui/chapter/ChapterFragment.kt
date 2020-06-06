@@ -44,8 +44,11 @@ class ChapterFragment : SearchableFragment(R.layout.fragment_chapter) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         setSubmitText {
-            val action = ChapterFragmentDirections.actionChapterFragmentToSearchResultFragment(it!!)
-            navController.navigate(action)
+            if (it.isNotEmpty()) {
+                val action =
+                    ChapterFragmentDirections.actionChapterFragmentToSearchResultFragment(it)
+                navController.navigate(action)
+            }
         }
         chapters_list.adapter = adapter
         chapters_list.addItemDecoration(

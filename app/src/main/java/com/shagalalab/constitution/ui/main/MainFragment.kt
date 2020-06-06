@@ -41,8 +41,10 @@ class MainFragment : SearchableFragment(R.layout.fragment_main) {
             chooseLanguage(Language.RU.ordinal)
         }
         setSubmitText {
-            val action = MainFragmentDirections.actionMainFragmentToSearchResultFragment(it!!)
-            navController.navigate(action)
+            if (it.isNotEmpty()) {
+                val action = MainFragmentDirections.actionMainFragmentToSearchResultFragment(it)
+                navController.navigate(action)
+            }
         }
     }
 
