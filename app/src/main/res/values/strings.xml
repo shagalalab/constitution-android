@@ -6,5 +6,7 @@
     <string name="lang_en">English</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
-    <string name="search">search</string>
+    <string name="search">Search</string>
+    <string name="results_for">Results for \"</string>
+    <string name="language">Language</string>
 </resources>

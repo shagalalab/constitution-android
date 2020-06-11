@@ -20,12 +20,6 @@ class ArticleViewModel(private val articleDao: ArticleDao) : ViewModel() {
         }
     }
 
-    fun getAllArticles() {
-        Executors.newSingleThreadExecutor().execute {
-            articleListLiveData.postValue(articleDao.getArticles())
-        }
-    }
-
     fun getArticlesByPartId(partId: Int) {
         Executors.newSingleThreadExecutor().execute {
             articleListLiveData.postValue(articleDao.getArticlesByPartId(partId))

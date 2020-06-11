@@ -129,7 +129,7 @@
     </fragment>
     <fragment
         android:id="@+id/foundArticle"
-        android:name="com.shagalalab.constitution.ui.search.FoundArticle"
+        android:name="com.shagalalab.constitution.ui.search.SearchArticleFragment"
         android:label="{title}">
         <argument
             android:name="title"

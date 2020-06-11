@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.shagalalab.constitution.R
 
@@ -34,7 +34,7 @@ open class SearchableFragment(resId: Int) : Fragment(resId) {
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                return true
+                return false
             }
         }
         )
