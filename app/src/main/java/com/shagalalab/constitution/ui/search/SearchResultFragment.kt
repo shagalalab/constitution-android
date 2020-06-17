@@ -27,10 +27,12 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
     private val safeArgs: SearchResultFragmentArgs by navArgs()
     private val viewModel: ArticleViewModel by viewModel()
     private lateinit var navController: NavController
+    private val models: MutableList<ListItem> = mutableListOf()
+    private var currentLanguageId = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tvResults.text = getString(R.string.results_for) + "${safeArgs.query}\""
+        tvResults.text = getString(R.string.results_for, safeArgs.query)
         navController = Navigation.findNavController(view)
         val query = safeArgs.query
         resultsList.adapter = adapter
@@ -53,9 +55,6 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
             setData(it)
         })
     }
-
-    private val models: MutableList<ListItem> = mutableListOf()
-    private var currentLanguageId = 0
 
     private fun setData(data: List<ArticleModel>) {
         data.forEach {
