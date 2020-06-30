@@ -1,13 +1,9 @@
 package com.shagalalab.constitution.ui.base
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.shagalalab.constitution.R
@@ -30,7 +26,6 @@ open class SearchableFragment(resId: Int) : Fragment(resId) {
         val searchItem: MenuItem = menu.findItem(R.id.menu)
         val searchView: SearchView =
             searchItem.actionView as SearchView
-        changeSearchViewTextColor(searchView)
         searchView.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String): Boolean {
@@ -44,18 +39,5 @@ open class SearchableFragment(resId: Int) : Fragment(resId) {
         }
         )
         super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    private fun changeSearchViewTextColor(view: View?) {
-        if (view != null) {
-            if (view is TextView) {
-                view.setTextColor(Color.WHITE)
-                return
-            } else if (view is ViewGroup) {
-                for (i in 0 until view.childCount) {
-                    changeSearchViewTextColor(view.getChildAt(i))
-                }
-            }
-        }
     }
 }
