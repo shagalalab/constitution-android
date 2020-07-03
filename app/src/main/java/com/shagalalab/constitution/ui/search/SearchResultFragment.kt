@@ -71,7 +71,7 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
             }
             val spannedString = SpannableStringBuilder()
             spannedString.append(DataHolder.parts[it.partId - 1].title + "»")
-            if (it.chapterId != 0) spannedString.append(DataHolder.chapters[it.chapterId].title + "»")
+            if (it.chapterId != 0) spannedString.append(DataHolder.chapters[it.chapterId - 1].title + "»")
             spannedString.append(it.title)
             val articleItem =
                 ArticleItem(2, spannedString.toString(), it.foundArticle(safeArgs.query), it.id)
