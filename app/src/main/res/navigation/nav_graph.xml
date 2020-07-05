@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.shagalalab.constitution.main.MainFragment"
+        android:name="com.shagalalab.constitution.ui.main.MainFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_main">
         <action
@@ -17,10 +17,17 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/partFragment"
-        android:name="com.shagalalab.constitution.part.PartFragment"
+        android:name="com.shagalalab.constitution.ui.part.PartFragment"
         android:label="{title}"
         tools:layout="@layout/fragment_part">
         <action
@@ -46,10 +53,17 @@
             android:name="title"
             android:defaultValue="Parts"
             app:argType="string" />
+        <action
+            android:id="@+id/action_partFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/chapterFragment"
-        android:name="com.shagalalab.constitution.chapter.ChapterFragment"
+        android:name="com.shagalalab.constitution.ui.chapter.ChapterFragment"
         android:label="{title}">
         <action
             android:id="@+id/action_chapterFragment_to_articleFragment"
@@ -72,10 +86,17 @@
             android:name="lang"
             android:defaultValue="1"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_chapterFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/articleFragment"
-        android:name="com.shagalalab.constitution.article.ArticleFragment"
+        android:name="com.shagalalab.constitution.ui.article.ArticleFragment"
         android:label="{title}">
         <argument
             android:name="title"
@@ -89,5 +110,37 @@
             android:name="check"
             android:defaultValue="false"
             app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.shagalalab.constitution.ui.search.SearchResultFragment"
+        android:label="SearchResults">
+
+        <argument
+            android:name="query"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_searchResultFragment_to_foundArticle"
+            app:destination="@id/foundArticle"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/foundArticle"
+        android:name="com.shagalalab.constitution.ui.search.SearchArticleFragment"
+        android:label="{title}">
+        <argument
+            android:name="title"
+            android:defaultValue="Article"
+            app:argType="string" />
+        <argument
+            android:name="id"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="queryWord"
+            app:argType="string" />
     </fragment>
 </navigation>

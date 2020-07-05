@@ -15,4 +15,10 @@ interface ArticleDao {
 
     @Query("SELECT * FROM articles WHERE part_id=:partId")
     fun getArticlesByPartId(partId: Int): List<ArticleModel>
+
+    @Query("SELECT * FROM articles WHERE description like :word")
+    fun findArticleByWord(word: String): List<ArticleModel>
+
+    @Query("SELECT * FROM articles WHERE id=:id")
+    fun getArticleById(id: Int): ArticleModel
 }

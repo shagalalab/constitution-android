@@ -1,4 +1,4 @@
-package com.shagalalab.constitution.part
+package com.shagalalab.constitution.ui.part
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,6 +16,9 @@ class PartViewModel(
     private val partListLiveData: MutableLiveData<List<PartModel>> = MutableLiveData()
     val partList: LiveData<List<PartModel>> = partListLiveData
 
+    private val partLiveData: MutableLiveData<PartModel> = MutableLiveData()
+    val part: LiveData<PartModel> = partLiveData
+
     private val chapterClickResultLiveData: MutableLiveData<Int> = MutableLiveData()
     val chapterClickResult: LiveData<Int> = chapterClickResultLiveData
 
@@ -28,6 +31,12 @@ class PartViewModel(
         }
     }
 
+    fun getPartById(id: Int) {
+        Executors.newSingleThreadExecutor().execute {
+            partLiveData.postValue(partDao.getPartsById(id))
+        }
+    }
+
     fun getChapterScreen(id: Int) {
         Executors.newSingleThreadExecutor().execute {
             if (chapterDao.getChaptersByPartId(id).isNotEmpty()) {
@@ -35,6 +44,12 @@ class PartViewModel(
             } else {
                 preambleClickResultLiveData.postValue(id)
             }
+        }
+    }
+
+    fun getAllParts() {
+        Executors.newSingleThreadExecutor().execute {
+            partListLiveData.postValue(partDao.getParts())
         }
     }
 }

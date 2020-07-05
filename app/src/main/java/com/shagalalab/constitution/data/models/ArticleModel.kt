@@ -1,8 +1,11 @@
 package com.shagalalab.constitution.data.models
 
+import android.graphics.Color
 import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.style.BackgroundColorSpan
+import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -47,6 +50,68 @@ data class ArticleModel(
         }
         spannedString.append(description.replace("\\n", "\n"))
         spannedString.append("\n\n")
+        return spannedString
+    }
+
+    companion object {
+        const val MAX_WORDS = 5
+    }
+
+    fun foundArticle(word: String): SpannableStringBuilder {
+        val spannedString = SpannableStringBuilder()
+        description = description.replace("\\n", "\n")
+        val index = description.indexOf(word, 0, true)
+
+        var count = 0
+        var startIndex = description.lastIndexOf(" ", index)
+        while (count != MAX_WORDS && startIndex != -1) {
+            count += 1
+            startIndex = description.lastIndexOf(" ", startIndex - 1)
+        }
+
+        var endIndex = description.indexOf(" ", index)
+        count = 0
+        while (count != MAX_WORDS && endIndex != -1) {
+            count += 1
+            endIndex = description.indexOf(" ", endIndex + 1)
+        }
+
+        if (endIndex == -1) {
+            endIndex = description.length
+        }
+        if (startIndex == -1) {
+            startIndex = 0
+        }
+
+        spannedString.append(description.substring(startIndex, endIndex))
+
+        spannedString.setSpan(
+            StyleSpan(Typeface.BOLD),
+            index - startIndex,
+            index - startIndex + word.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        spannedString.setSpan(
+            ForegroundColorSpan(Color.BLACK),
+            index - startIndex,
+            index - startIndex + word.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        return spannedString
+    }
+
+    fun selectedArticle(word: String): SpannableStringBuilder {
+        val spannedString = SpannableStringBuilder()
+        description = description.replace("\\n", "\n")
+        spannedString.append(description)
+        val ind = spannedString.indexOf(word, 0, true)
+        spannedString.setSpan(
+            BackgroundColorSpan(Color.parseColor("#ffd600")),
+            ind,
+            ind + word.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         return spannedString
     }
 }

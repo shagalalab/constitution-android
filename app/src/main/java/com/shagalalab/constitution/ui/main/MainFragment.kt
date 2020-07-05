@@ -1,15 +1,15 @@
-package com.shagalalab.constitution.main
+package com.shagalalab.constitution.ui.main
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.shagalalab.constitution.R
 import com.shagalalab.constitution.data.Language
+import com.shagalalab.constitution.ui.base.SearchableFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : Fragment(R.layout.fragment_main) {
+class MainFragment : SearchableFragment(R.layout.fragment_main) {
 
     private lateinit var navController: NavController
 
@@ -39,6 +39,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
         ru_text.setOnClickListener {
             chooseLanguage(Language.RU.ordinal)
+        }
+        setSubmitText {
+            if (it.isNotEmpty()) {
+                val action = MainFragmentDirections.actionMainFragmentToSearchResultFragment(it)
+                navController.navigate(action)
+            }
         }
     }
 

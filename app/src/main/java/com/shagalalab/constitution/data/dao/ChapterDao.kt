@@ -12,4 +12,7 @@ interface ChapterDao {
 
     @Query("SELECT * FROM chapters WHERE part_id=:partId")
     fun getChaptersByPartId(partId: Int): List<ChapterModel>
+
+    @Query("SELECT * FROM chapters WHERE id=:id")
+    fun getChapterById(id: Int): ChapterModel
 }
