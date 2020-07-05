@@ -18,7 +18,7 @@
         <item name="colorControlNormal">@android:color/white</item>
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="colorAccent">@android:color/white</item>
-        <item name="android:textColorHint">@color/white_smoke</item>
+        <item name="android:textColorHint">@color/blue_gray_200</item>
     </style>
 
 </resources>
