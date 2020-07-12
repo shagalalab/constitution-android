@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.shagalalab.constitution.data.dao.ChapterDao
 import com.shagalalab.constitution.data.models.ChapterModel
-import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executor
 
 class ChapterViewModel(
     private val chapterDao: ChapterDao,
-    private val executorService: ExecutorService
+    private val executorService: Executor
 ) : ViewModel() {
 
     private val chapterListLiveData: MutableLiveData<List<ChapterModel>> = MutableLiveData()

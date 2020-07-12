@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.shagalalab.constitution.data.dao.ArticleDao
 import com.shagalalab.constitution.data.models.ArticleModel
-import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executor
 
 class ArticleViewModel(
     private val articleDao: ArticleDao,
-    private val executorService: ExecutorService
+    private val executorService: Executor
 ) :
     ViewModel() {
 
