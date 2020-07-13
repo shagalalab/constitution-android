@@ -6,18 +6,16 @@ import androidx.lifecycle.ViewModel
 import com.shagalalab.constitution.data.dao.ChapterDao
 import com.shagalalab.constitution.data.dao.PartDao
 import com.shagalalab.constitution.data.models.PartModel
-import java.util.concurrent.Executors
+import java.util.concurrent.Executor
 
 class PartViewModel(
     private val partDao: PartDao,
-    private val chapterDao: ChapterDao
+    private val chapterDao: ChapterDao,
+    private val executor: Executor
 ) : ViewModel() {
 
     private val partListLiveData: MutableLiveData<List<PartModel>> = MutableLiveData()
     val partList: LiveData<List<PartModel>> = partListLiveData
-
-    private val partLiveData: MutableLiveData<PartModel> = MutableLiveData()
-    val part: LiveData<PartModel> = partLiveData
 
     private val chapterClickResultLiveData: MutableLiveData<Int> = MutableLiveData()
     val chapterClickResult: LiveData<Int> = chapterClickResultLiveData
@@ -26,19 +24,13 @@ class PartViewModel(
     val preambleClickResult: LiveData<Int> = preambleClickResultLiveData
 
     fun getPartsByLangId(langId: Int) {
-        Executors.newSingleThreadExecutor().execute {
+        executor.execute {
             partListLiveData.postValue(partDao.getPartsByLanguage(langId))
         }
     }
 
-    fun getPartById(id: Int) {
-        Executors.newSingleThreadExecutor().execute {
-            partLiveData.postValue(partDao.getPartsById(id))
-        }
-    }
-
     fun getChapterScreen(id: Int) {
-        Executors.newSingleThreadExecutor().execute {
+        executor.execute {
             if (chapterDao.getChaptersByPartId(id).isNotEmpty()) {
                 chapterClickResultLiveData.postValue(id)
             } else {
@@ -48,7 +40,7 @@ class PartViewModel(
     }
 
     fun getAllParts() {
-        Executors.newSingleThreadExecutor().execute {
+        executor.execute {
             partListLiveData.postValue(partDao.getParts())
         }
     }

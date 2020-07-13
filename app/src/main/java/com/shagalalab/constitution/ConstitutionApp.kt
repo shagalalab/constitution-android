@@ -2,6 +2,7 @@ package com.shagalalab.constitution
 
 import android.app.Application
 import com.shagalalab.constitution.di.dataModule
+import com.shagalalab.constitution.di.executorModule
 import com.shagalalab.constitution.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
@@ -12,7 +13,7 @@ class ConstitutionApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        val modules = listOf(dataModule, viewModelModule)
+        val modules = listOf(dataModule, viewModelModule, executorModule)
         startKoin {
             androidLogger()
             androidContext(this@ConstitutionApp)
