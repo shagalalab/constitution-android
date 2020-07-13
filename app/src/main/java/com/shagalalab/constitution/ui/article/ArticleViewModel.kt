@@ -9,7 +9,7 @@ import java.util.concurrent.Executor
 
 class ArticleViewModel(
     private val articleDao: ArticleDao,
-    private val executorService: Executor
+    private val executor: Executor
 ) :
     ViewModel() {
 
@@ -19,25 +19,25 @@ class ArticleViewModel(
     val article: LiveData<ArticleModel> = articleLivaData
 
     fun getArticlesByChapterId(chapterId: Int) {
-        executorService.execute {
+        executor.execute {
             articleListLiveData.postValue(articleDao.getArticlesByChapterId(chapterId))
         }
     }
 
     fun getArticlesByPartId(partId: Int) {
-        executorService.execute {
+        executor.execute {
             articleListLiveData.postValue(articleDao.getArticlesByPartId(partId))
         }
     }
 
     fun findArticlesByWord(word: String) {
-        executorService.execute {
+        executor.execute {
             articleListLiveData.postValue(articleDao.findArticleByWord("%$word%"))
         }
     }
 
     fun getArticleById(id: Int) {
-        executorService.execute {
+        executor.execute {
             articleLivaData.postValue(articleDao.getArticleById(id))
         }
     }

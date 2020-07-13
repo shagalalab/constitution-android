@@ -11,7 +11,7 @@ import java.util.concurrent.Executor
 class PartViewModel(
     private val partDao: PartDao,
     private val chapterDao: ChapterDao,
-    private val executorService: Executor
+    private val executor: Executor
 ) : ViewModel() {
 
     private val partListLiveData: MutableLiveData<List<PartModel>> = MutableLiveData()
@@ -24,13 +24,13 @@ class PartViewModel(
     val preambleClickResult: LiveData<Int> = preambleClickResultLiveData
 
     fun getPartsByLangId(langId: Int) {
-        executorService.execute {
+        executor.execute {
             partListLiveData.postValue(partDao.getPartsByLanguage(langId))
         }
     }
 
     fun getChapterScreen(id: Int) {
-        executorService.execute {
+        executor.execute {
             if (chapterDao.getChaptersByPartId(id).isNotEmpty()) {
                 chapterClickResultLiveData.postValue(id)
             } else {
@@ -40,7 +40,7 @@ class PartViewModel(
     }
 
     fun getAllParts() {
-        executorService.execute {
+        executor.execute {
             partListLiveData.postValue(partDao.getParts())
         }
     }

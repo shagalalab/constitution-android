@@ -9,20 +9,20 @@ import java.util.concurrent.Executor
 
 class ChapterViewModel(
     private val chapterDao: ChapterDao,
-    private val executorService: Executor
+    private val executor: Executor
 ) : ViewModel() {
 
     private val chapterListLiveData: MutableLiveData<List<ChapterModel>> = MutableLiveData()
     val chapterList: LiveData<List<ChapterModel>> = chapterListLiveData
 
     fun getChaptersByPartId(partId: Int) {
-        executorService.execute {
+        executor.execute {
             chapterListLiveData.postValue(chapterDao.getChaptersByPartId(partId))
         }
     }
 
     fun getAllChapters() {
-        executorService.execute {
+        executor.execute {
             chapterListLiveData.postValue(chapterDao.getChapters())
         }
     }
