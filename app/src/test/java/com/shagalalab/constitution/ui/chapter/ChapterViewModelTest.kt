@@ -29,16 +29,26 @@ class ChapterViewModelTest {
 
     @Test
     fun `verify getChaptersByPartId returns correct results`() {
+        // given
         every { daoMock.getChaptersByPartId(1) } returns models
+
+        // when
         viewModel.getChaptersByPartId(1)
+
+        // then
         val result = viewModel.chapterList.value
         Assert.assertEquals(models, result)
     }
 
     @Test
     fun `verify getAllChapters returns correct results`() {
+        // given
         every { daoMock.getChapters() } returns models
+
+        // when
         viewModel.getAllChapters()
+
+        // then
         val result = viewModel.chapterList.value
         Assert.assertEquals(models, result)
     }

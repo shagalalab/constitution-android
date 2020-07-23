@@ -28,34 +28,54 @@ class ArticleViewModelTest {
     val rule = InstantTaskExecutorRule()
 
     @Test
-    fun getArticlesByChapterId() {
+    fun `verify getArticlesByChapterId returns correct results`() {
+        // given
         every { articleMockDao.getArticlesByChapterId(1) } returns articleModels
+
+        // when
         viewModel.getArticlesByChapterId(1)
+
+        // then
         val result = viewModel.articleList.value
         Assert.assertEquals(result, articleModels)
     }
 
     @Test
-    fun getArticlesByPartId() {
+    fun `verify getArticlesByPartId returns correct results`() {
+        // given
         every { articleMockDao.getArticlesByPartId(1) } returns articleModels
+
+        // when
         viewModel.getArticlesByPartId(1)
+
+        // then
         val result = viewModel.articleList.value
         Assert.assertEquals(result, articleModels)
     }
 
     @Test
-    fun findArticlesByWord() {
+    fun `verify findArticlesByWord returns correct results`() {
+        // given
         val word = "republic"
         every { articleMockDao.findArticleByWord("%$word%") } returns articleModels
+
+        // when
         viewModel.findArticlesByWord(word)
+
+        // then
         val result = viewModel.articleList.value
         Assert.assertEquals(result, articleModels)
     }
 
     @Test
-    fun getArticleById() {
+    fun `verify getArticleById returns correct results`() {
+        // given
         every { articleMockDao.getArticleById(1) } returns articleModel
+
+        // when
         viewModel.getArticleById(1)
+
+        // then
         val result = viewModel.article.value
         Assert.assertEquals(result, articleModel)
     }
