@@ -58,19 +58,28 @@ class PartViewModelTest {
     }
 
     @Test
-    fun `verify getChapterScreen returns correct results`() {
+    fun `verify getChapterScreen returns chapterClick results`() {
         // given
         every { chapterDaoMock.getChaptersByPartId(1) } returns listOf(chapterModel)
-        every { chapterDaoMock.getChaptersByPartId(0) } returns listOf()
 
         // when
         viewModel.getChapterScreen(1)
-        viewModel.getChapterScreen(0)
 
         // then
         val chapterClicked = viewModel.chapterClickResult.value
-        val preambleClicked = viewModel.preambleClickResult.value
         Assert.assertEquals(chapterClicked, 1)
+    }
+
+    @Test
+    fun `verify getChapterScreen returns preambleClick result`() {
+        // given
+        every { chapterDaoMock.getChaptersByPartId(0) } returns listOf()
+
+        // when
+        viewModel.getChapterScreen(0)
+
+        // then
+        val preambleClicked = viewModel.preambleClickResult.value
         Assert.assertEquals(preambleClicked, 0)
     }
 }
