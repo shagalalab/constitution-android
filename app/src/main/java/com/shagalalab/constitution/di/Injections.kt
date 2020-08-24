@@ -11,13 +11,15 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+private const val DB_FILE_NAME = "constitution.db"
+
 val dataModule = module {
     single {
         Room.databaseBuilder(
             androidContext(), ConstitutionDatabase::class.java,
-            "constitution.db"
+            DB_FILE_NAME
         )
-            .createFromAsset("constitution.db")
+            .createFromAsset(DB_FILE_NAME)
             .build()
     }
     single { get<ConstitutionDatabase>().articleDao() }

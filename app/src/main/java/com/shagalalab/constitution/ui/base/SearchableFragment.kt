@@ -10,34 +10,31 @@ import com.shagalalab.constitution.R
 
 open class SearchableFragment(resId: Int) : Fragment(resId) {
 
+    private lateinit var submitText: (text: String) -> Unit
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
     }
 
-    private lateinit var submitText: (text: String) -> Unit
-
-    fun setSubmitText(submitText: (text: String) -> Unit) {
-        this.submitText = submitText
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu, menu)
         val searchItem: MenuItem = menu.findItem(R.id.menu)
-        val searchView: SearchView =
-            searchItem.actionView as SearchView
-        searchView.setOnQueryTextListener(object :
-            SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String): Boolean {
-                submitText.invoke(p0)
+        val searchView: SearchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                submitText.invoke(query)
                 return true
             }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
+            override fun onQueryTextChange(newText: String?): Boolean {
                 return false
             }
         }
         )
-        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    fun setSubmitText(submitText: (text: String) -> Unit) {
+        this.submitText = submitText
     }
 }

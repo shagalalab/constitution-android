@@ -19,7 +19,7 @@ class SearchArticleFragment : Fragment(R.layout.fragment_article) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getArticleById(safeArg.id)
         viewModel.article.observe(viewLifecycleOwner, Observer {
-            textView.text = it.selectedArticle(safeArg.queryWord)
+            textView.text = it.highlightKeyword(safeArg.queryWord)
         })
     }
 }

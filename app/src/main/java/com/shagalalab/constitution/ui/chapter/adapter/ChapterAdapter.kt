@@ -6,16 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shagalalab.constitution.R
 import com.shagalalab.constitution.data.models.ChapterModel
 
-class ChapterAdapter :
+class ChapterAdapter(private val itemClick: (model: ChapterModel) -> Unit) :
     RecyclerView.Adapter<ChapterItemViewHolder>() {
 
     private var models: List<ChapterModel> = arrayListOf()
-
-    private lateinit var itemClick: (ChapterModel) -> Unit
-
-    fun setItemClick(itemCLick: (model: ChapterModel) -> Unit) {
-        this.itemClick = itemCLick
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChapterItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_view, parent, false)

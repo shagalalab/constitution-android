@@ -57,61 +57,88 @@ data class ArticleModel(
         const val MAX_WORDS = 5
     }
 
-    fun foundArticle(word: String): SpannableStringBuilder {
+    fun getShortenedDescription(keyword: String): SpannableStringBuilder {
+        val shortenedDescription = cutDescription(description, keyword)
+        return formatDescription(shortenedDescription, keyword)
+    }
+
+    fun highlightKeyword(word: String): SpannableStringBuilder {
         val spannedString = SpannableStringBuilder()
         description = description.replace("\\n", "\n")
-        val index = description.indexOf(word, 0, true)
-
-        var count = 0
-        var startIndex = description.lastIndexOf(" ", index)
-        while (count != MAX_WORDS && startIndex != -1) {
-            count += 1
-            startIndex = description.lastIndexOf(" ", startIndex - 1)
-        }
-
-        var endIndex = description.indexOf(" ", index)
-        count = 0
-        while (count != MAX_WORDS && endIndex != -1) {
-            count += 1
-            endIndex = description.indexOf(" ", endIndex + 1)
-        }
-
-        if (endIndex == -1) {
-            endIndex = description.length
-        }
-        if (startIndex == -1) {
-            startIndex = 0
-        }
-
-        spannedString.append(description.substring(startIndex, endIndex))
-
+        spannedString.append(description)
+        val index = spannedString.indexOf(word, 0, true)
         spannedString.setSpan(
-            StyleSpan(Typeface.BOLD),
-            index - startIndex,
-            index - startIndex + word.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-
-        spannedString.setSpan(
-            ForegroundColorSpan(Color.BLACK),
-            index - startIndex,
-            index - startIndex + word.length,
+            BackgroundColorSpan(Color.parseColor("#ffd600")),
+            index,
+            index + word.length,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         return spannedString
     }
 
-    fun selectedArticle(word: String): SpannableStringBuilder {
-        val spannedString = SpannableStringBuilder()
-        description = description.replace("\\n", "\n")
-        spannedString.append(description)
-        val ind = spannedString.indexOf(word, 0, true)
-        spannedString.setSpan(
-            BackgroundColorSpan(Color.parseColor("#ffd600")),
-            ind,
-            ind + word.length,
+    private fun cutDescription(originalDescription: String, keyword: String): String {
+        var needsStartEllipsize = false
+        var needsEndEllipsize = false
+        var modifiedDescription = originalDescription.replace("\\n", " ").trim()
+        val index = modifiedDescription.indexOf(keyword, 0, true)
+
+        var startCount = 0
+        var startIndex = modifiedDescription.lastIndexOf(" ", index)
+        while (startCount < MAX_WORDS && startIndex > -1) {
+            startCount++
+            startIndex = modifiedDescription.lastIndexOf(" ", startIndex - 1)
+        }
+
+        var endCount = 0
+        var endIndex = modifiedDescription.indexOf(" ", index)
+        while (endCount < MAX_WORDS && endIndex > -1) {
+            endCount++
+            endIndex = modifiedDescription.indexOf(" ", endIndex + 1)
+        }
+
+        if (startIndex > -1) {
+            needsStartEllipsize = true
+        } else {
+            startIndex = 0
+        }
+        if (endIndex == -1) {
+            endIndex = modifiedDescription.length
+        } else {
+            needsEndEllipsize = true
+        }
+        modifiedDescription = modifiedDescription.substring(startIndex, endIndex).trim()
+
+        if (needsStartEllipsize) {
+            modifiedDescription = "... $modifiedDescription"
+        }
+        if (needsEndEllipsize) {
+            modifiedDescription = "$modifiedDescription ..."
+        }
+
+        return modifiedDescription
+    }
+
+    private fun formatDescription(
+        shortenedDescription: String,
+        keyword: String
+    ): SpannableStringBuilder {
+        val spannableStringBuilder = SpannableStringBuilder()
+        spannableStringBuilder.append(shortenedDescription)
+        val index = shortenedDescription.indexOf(keyword, 0, true)
+
+        spannableStringBuilder.setSpan(
+            StyleSpan(Typeface.BOLD),
+            index,
+            index + keyword.length,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        return spannedString
+
+        spannableStringBuilder.setSpan(
+            ForegroundColorSpan(Color.BLACK),
+            index,
+            index + keyword.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        return spannableStringBuilder
     }
 }

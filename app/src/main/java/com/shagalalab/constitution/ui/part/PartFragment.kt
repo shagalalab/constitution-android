@@ -18,7 +18,9 @@ class PartFragment : SearchableFragment(R.layout.fragment_part) {
 
     private val safeArgs: PartFragmentArgs by navArgs()
     private val lang by lazy { safeArgs.lang }
-    private val adapter = PartAdapter()
+    private val adapter = PartAdapter {
+        viewModel.getChapterScreen(it)
+    }
 
     private lateinit var navController: NavController
     private val viewModel: PartViewModel by viewModel()
@@ -37,10 +39,6 @@ class PartFragment : SearchableFragment(R.layout.fragment_part) {
             partList.observe(this@PartFragment, Observer {
                 adapter.setData(it)
             })
-        }
-
-        adapter.setOnClick {
-            viewModel.getChapterScreen(it)
         }
     }
 

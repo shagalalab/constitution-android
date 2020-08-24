@@ -57,24 +57,29 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
     }
 
     private fun setData(data: List<ArticleModel>) {
-        data.forEach {
-            val langItem = LangItem(1, "")
-            if (currentLanguageId == 0 || currentLanguageId != it.langId) {
-                currentLanguageId = it.langId
-                when (it.langId) {
-                    Language.QQ.ordinal + 1 -> langItem.lang = "Qaraqalpaqsha"
-                    Language.RU.ordinal + 1 -> langItem.lang = "Русский"
-                    Language.UZ.ordinal + 1 -> langItem.lang = "O'zbekcha"
-                    Language.EN.ordinal + 1 -> langItem.lang = "English"
+        data.forEach { article ->
+            val langItem = LangItem("")
+            if (currentLanguageId == 0 || currentLanguageId != article.langId) {
+                currentLanguageId = article.langId
+                langItem.lang = when (article.langId + 1) {
+                    Language.QQ.ordinal -> "Qaraqalpaqsha"
+                    Language.RU.ordinal -> "Русский"
+                    Language.UZ.ordinal -> "O'zbekcha"
+                    Language.EN.ordinal -> "English"
+                    else -> ""
                 }
                 models.add(langItem)
             }
             val spannedString = SpannableStringBuilder()
-            spannedString.append(DataHolder.parts[it.partId - 1].title + "»")
-            if (it.chapterId != 0) spannedString.append(DataHolder.chapters[it.chapterId - 1].title + "»")
-            spannedString.append(it.title)
+            spannedString.append(DataHolder.parts[article.partId - 1].title + " » ")
+            if (article.chapterId != 0) spannedString.append(DataHolder.chapters[article.chapterId - 1].title + " » ")
+            spannedString.append(article.title)
             val articleItem =
-                ArticleItem(2, spannedString.toString(), it.foundArticle(safeArgs.query), it.id)
+                ArticleItem(
+                    article.id,
+                    spannedString.toString(),
+                    article.getShortenedDescription(safeArgs.query)
+                )
             models.add(articleItem)
         }
         adapter.models = models

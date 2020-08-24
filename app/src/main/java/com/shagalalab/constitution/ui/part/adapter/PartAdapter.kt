@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shagalalab.constitution.R
 import com.shagalalab.constitution.data.models.PartModel
 
-class PartAdapter :
+class PartAdapter(private val onItemClick: (Int) -> Unit) :
     RecyclerView.Adapter<PartItemViewHolder>() {
 
     private var models: List<PartModel> = arrayListOf()
@@ -14,12 +14,6 @@ class PartAdapter :
     fun setData(models: List<PartModel>) {
         this.models = models
         notifyDataSetChanged()
-    }
-
-    private lateinit var onItemClick: (Int) -> Unit
-
-    fun setOnClick(modelId: (Int) -> Unit) {
-        this.onItemClick = modelId
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PartItemViewHolder {
