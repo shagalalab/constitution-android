@@ -61,7 +61,7 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
             val langItem = LangItem("")
             if (currentLanguageId == 0 || currentLanguageId != article.langId) {
                 currentLanguageId = article.langId
-                langItem.lang = when (article.langId + 1) {
+                langItem.lang = when (article.langId - 1) {
                     Language.QQ.ordinal -> "Qaraqalpaqsha"
                     Language.RU.ordinal -> "Русский"
                     Language.UZ.ordinal -> "O'zbekcha"
