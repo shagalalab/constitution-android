@@ -42,7 +42,10 @@ class MainFragment : SearchableFragment(R.layout.fragment_main) {
         }
         setSubmitText {
             if (it.isNotEmpty()) {
-                val action = MainFragmentDirections.actionMainFragmentToSearchResultFragment(it)
+                val action = MainFragmentDirections.actionMainFragmentToSearchResultFragment(
+                    "Izlew nátiyjeleri",
+                    it
+                )
                 navController.navigate(action)
             }
         }
