@@ -29,17 +29,15 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
     private lateinit var navController: NavController
     private val models: MutableList<ListItem> = mutableListOf()
     private var currentLanguageId = 0
-    private var resultsFor = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         when (safeArgs.lang) {
-            Language.QQ.ordinal -> resultsFor = getString(R.string.qq_results_for, safeArgs.query)
-            Language.RU.ordinal -> resultsFor = getString(R.string.ru_results_for, safeArgs.query)
-            Language.UZ.ordinal -> resultsFor = getString(R.string.uz_results_for, safeArgs.query)
-            Language.EN.ordinal -> resultsFor = getString(R.string.en_results_for, safeArgs.query)
+            Language.QQ.ordinal -> tvResults.text = getString(R.string.qq_results_for, safeArgs.query)
+            Language.RU.ordinal -> tvResults.text = getString(R.string.ru_results_for, safeArgs.query)
+            Language.UZ.ordinal -> tvResults.text = getString(R.string.uz_results_for, safeArgs.query)
+            Language.EN.ordinal -> tvResults.text = getString(R.string.en_results_for, safeArgs.query)
         }
-        tvResults.text = resultsFor
         navController = Navigation.findNavController(view)
         val query = safeArgs.query
         resultsList.adapter = adapter
