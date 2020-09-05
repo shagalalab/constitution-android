@@ -32,11 +32,13 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        when (safeArgs.lang) {
-            Language.QQ.ordinal -> tvResults.text = getString(R.string.qq_results_for, safeArgs.query)
-            Language.RU.ordinal -> tvResults.text = getString(R.string.ru_results_for, safeArgs.query)
-            Language.UZ.ordinal -> tvResults.text = getString(R.string.uz_results_for, safeArgs.query)
-            Language.EN.ordinal -> tvResults.text = getString(R.string.en_results_for, safeArgs.query)
+
+        tvResults.text = when (safeArgs.lang) {
+            Language.QQ.ordinal -> getString(R.string.qq_results_for, safeArgs.query)
+            Language.RU.ordinal -> getString(R.string.ru_results_for, safeArgs.query)
+            Language.UZ.ordinal -> getString(R.string.uz_results_for, safeArgs.query)
+            Language.EN.ordinal -> getString(R.string.en_results_for, safeArgs.query)
+            else -> getString(R.string.qq_results_for, safeArgs.query)
         }
         navController = Navigation.findNavController(view)
         val query = safeArgs.query
