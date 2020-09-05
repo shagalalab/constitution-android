@@ -45,7 +45,11 @@ class ChapterFragment : SearchableFragment(R.layout.fragment_chapter) {
         setSubmitText {
             if (it.isNotEmpty()) {
                 val action =
-                    ChapterFragmentDirections.actionChapterFragmentToSearchResultFragment(it)
+                    ChapterFragmentDirections.actionChapterFragmentToSearchResultFragment(
+                        chooseSearchResultLang(lang),
+                        it,
+                        lang
+                    )
                 navController.navigate(action)
             }
         }
@@ -64,6 +68,16 @@ class ChapterFragment : SearchableFragment(R.layout.fragment_chapter) {
             Language.RU.ordinal -> "Статьи"
             Language.UZ.ordinal -> "Moddalar"
             Language.EN.ordinal -> "Articles"
+            else -> ""
+        }
+    }
+
+    private fun chooseSearchResultLang(langCode: Int): String {
+        return when (langCode) {
+            Language.QQ.ordinal -> "Izlew nátiyjeleri"
+            Language.RU.ordinal -> "Результаты запроса"
+            Language.UZ.ordinal -> "Izlash natijalari"
+            Language.EN.ordinal -> "Search Results"
             else -> ""
         }
     }

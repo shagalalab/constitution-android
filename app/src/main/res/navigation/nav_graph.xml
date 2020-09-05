@@ -114,11 +114,20 @@
     <fragment
         android:id="@+id/searchResultFragment"
         android:name="com.shagalalab.constitution.ui.search.SearchResultFragment"
-        android:label="SearchResults">
-
+        android:label="{title}">
+        <argument
+            android:name="title"
+            android:defaultValue="Izlew nátiyjeleri"
+            app:argType="string" />
         <argument
             android:name="query"
             app:argType="string" />
+
+        <argument
+            android:name="lang"
+            android:defaultValue="0"
+            app:argType="integer" />
+
         <action
             android:id="@+id/action_searchResultFragment_to_foundArticle"
             app:destination="@id/foundArticle"

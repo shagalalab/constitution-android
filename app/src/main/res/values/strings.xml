@@ -7,6 +7,9 @@
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="search">Search</string>
-    <string name="results_for">Results for \"%1$s\"</string>
+    <string name="en_results_for">Results for \"%1$s\"</string>
+    <string name="qq_results_for">\"%1$s\"  boyınsha tabılǵan nátiyjeler</string>
+    <string name="uz_results_for">\"%1$s\" bo`yıcha topilgan natiyjalar</string>
+    <string name="ru_results_for">Результаты для \"%1$s\"</string>
     <string name="language">Language</string>
 </resources>
