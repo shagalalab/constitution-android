@@ -1,7 +1,12 @@
 package com.shagalalab.constitution.ui.search
 
+import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
 import android.text.SpannableStringBuilder
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -40,6 +45,7 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
             Language.EN.ordinal -> getString(R.string.en_results_for, safeArgs.query)
             else -> getString(R.string.qq_results_for, safeArgs.query)
         }
+
         navController = Navigation.findNavController(view)
         val query = safeArgs.query
         resultsList.adapter = adapter
@@ -63,7 +69,54 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
         })
     }
 
+    private var noResultMsg = ""
+    private var hyperlink = ""
+    private fun detectHyperLinkLang(lang: Int) {
+        hyperlink = when (lang) {
+            Language.QQ.ordinal -> "arqa"
+            Language.RU.ordinal -> "назад"
+            Language.UZ.ordinal -> "orqaga"
+            Language.EN.ordinal -> "back"
+            else -> "arqa"
+        }
+        detectNoResultMsgLang(lang)
+    }
+
+    private fun detectNoResultMsgLang(lang: Int) {
+        noResultMsg = when (lang) {
+            Language.QQ.ordinal -> getString(R.string.no_results_qq, safeArgs.query, hyperlink)
+            Language.RU.ordinal -> getString(R.string.no_results_ru, safeArgs.query, hyperlink)
+            Language.UZ.ordinal -> getString(R.string.no_results_uz, safeArgs.query, hyperlink)
+            Language.EN.ordinal -> getString(R.string.no_results_en, safeArgs.query, hyperlink)
+            else -> getString(R.string.no_results_qq, safeArgs.query, hyperlink)
+        }
+        setText()
+    }
+
+    private fun setText() {
+        val spannedString = SpannableString(noResultMsg)
+        val clickableSpan: ClickableSpan = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                requireActivity().onBackPressed()
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.color = Color.BLUE
+            }
+        }
+        spannedString.setSpan(
+            clickableSpan,
+            spannedString.indexOf(hyperlink),
+            spannedString.indexOf(hyperlink) + hyperlink.length,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        tvNoResultsMsg.text = spannedString
+        tvNoResultsMsg.movementMethod = LinkMovementMethod.getInstance()
+    }
+
     private fun setData(data: List<ArticleModel>) {
+        checkData(data)
         data.forEach { article ->
             val langItem = LangItem("")
             if (currentLanguageId == 0 || currentLanguageId != article.langId) {
@@ -90,5 +143,16 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
             models.add(articleItem)
         }
         adapter.models = models
+    }
+
+    private fun checkData(data: List<ArticleModel>) {
+        if (data.isNullOrEmpty()) {
+            detectHyperLinkLang(safeArgs.lang)
+            resultFoundLayout.visibility = View.GONE
+            resultNotFoundLayout.visibility = View.VISIBLE
+        } else {
+            resultFoundLayout.visibility = View.VISIBLE
+            resultNotFoundLayout.visibility = View.GONE
+        }
     }
 }

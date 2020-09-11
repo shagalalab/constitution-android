@@ -11,5 +11,10 @@
     <string name="qq_results_for">\"%1$s\"  boyınsha tabılǵan nátiyjeler</string>
     <string name="uz_results_for">\"%1$s\" bo`yıcha topilgan natiyjalar</string>
     <string name="ru_results_for">Результаты для \"%1$s\"</string>
+    <string name="no_results_en">No results found for \"%1$s\", please try with different keyword or go %2$s</string>
+    <string name="no_results_qq">\"%1$s\" boyınsha hesh qanday nátiyje tabılmadı, basqa sóz benen izlep kóriń yaki %2$s qaytıń</string>
+    <string name="no_results_uz">\"%1$s\" bo`yıcha hech qanday natija topilmadi, boshqa so`z bilan qidirib ko`ring yoki %2$s qaytıng</string>
+    <string name="no_results_ru">По запросу \"%1$s\" ничего не найдено, попробуйте с другими ключевыми словами или вернитесь %2$s</string>
     <string name="language">Language</string>
 </resources>
+ 
