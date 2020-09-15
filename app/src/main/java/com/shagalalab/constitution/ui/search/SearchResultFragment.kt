@@ -69,35 +69,33 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
         })
     }
 
-    private var noResultMsg = ""
-    private var hyperlink = ""
     private fun detectHyperLinkLang(lang: Int) {
-        hyperlink = when (lang) {
-            Language.QQ.ordinal -> "arqa"
+        val hyperlink = when (lang) {
+            Language.QQ.ordinal -> "artqa"
             Language.RU.ordinal -> "назад"
             Language.UZ.ordinal -> "orqaga"
             Language.EN.ordinal -> "back"
-            else -> "arqa"
+            else -> "artqa"
         }
-        detectNoResultMsgLang(lang)
+        detectNoResultMsgLang(lang, hyperlink)
     }
 
-    private fun detectNoResultMsgLang(lang: Int) {
-        noResultMsg = when (lang) {
+    private fun detectNoResultMsgLang(lang: Int, hyperlink: String) {
+        val noResultMsg = when (lang) {
             Language.QQ.ordinal -> getString(R.string.no_results_qq, safeArgs.query, hyperlink)
             Language.RU.ordinal -> getString(R.string.no_results_ru, safeArgs.query, hyperlink)
             Language.UZ.ordinal -> getString(R.string.no_results_uz, safeArgs.query, hyperlink)
             Language.EN.ordinal -> getString(R.string.no_results_en, safeArgs.query, hyperlink)
             else -> getString(R.string.no_results_qq, safeArgs.query, hyperlink)
         }
-        setText()
+        setText(noResultMsg, hyperlink)
     }
 
-    private fun setText() {
+    private fun setText(noResultMsg: String, hyperlink: String) {
         val spannedString = SpannableString(noResultMsg)
         val clickableSpan: ClickableSpan = object : ClickableSpan() {
             override fun onClick(widget: View) {
-                requireActivity().onBackPressed()
+                navController.popBackStack()
             }
 
             override fun updateDrawState(ds: TextPaint) {
@@ -146,13 +144,13 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
     }
 
     private fun checkData(data: List<ArticleModel>) {
-        if (data.isNullOrEmpty()) {
+        if (data.isEmpty()) {
             detectHyperLinkLang(safeArgs.lang)
-            resultFoundLayout.visibility = View.GONE
-            resultNotFoundLayout.visibility = View.VISIBLE
+            tvResults.visibility = View.GONE
+            tvNoResultsMsg.visibility = View.VISIBLE
         } else {
-            resultFoundLayout.visibility = View.VISIBLE
-            resultNotFoundLayout.visibility = View.GONE
+            tvResults.visibility = View.VISIBLE
+            tvNoResultsMsg.visibility = View.GONE
         }
     }
 }
