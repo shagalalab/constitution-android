@@ -3,18 +3,24 @@ package com.shagalalab.constitution.ui.chapter
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shagalalab.constitution.R
 import com.shagalalab.constitution.data.Language
+import com.shagalalab.constitution.databinding.FragmentChapterBinding
 import com.shagalalab.constitution.ui.base.SearchableFragment
 import com.shagalalab.constitution.ui.chapter.adapter.ChapterAdapter
-import kotlinx.android.synthetic.main.fragment_chapter.*
+import com.shagalalab.constitution.ui.main.MainFragmentDirections
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChapterFragment : SearchableFragment(R.layout.fragment_chapter) {
+    private val binding by viewBinding(FragmentChapterBinding::bind)
 
     private val safeArgs: ChapterFragmentArgs by navArgs()
     private val lang by lazy { safeArgs.lang }
@@ -34,32 +40,33 @@ class ChapterFragment : SearchableFragment(R.layout.fragment_chapter) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.getChaptersByPartId(partId)
-        viewModel.chapterList.observe(this, Observer {
+        viewModel.chapterList.observe(this) {
             adapter.setData(it)
-        })
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        setSubmitText {
-            if (it.isNotEmpty()) {
-                val action =
-                    ChapterFragmentDirections.actionChapterFragmentToSearchResultFragment(
-                        chooseSearchResultLang(lang),
-                        it,
-                        lang
-                    )
-                navController.navigate(action)
-            }
-        }
-        chapters_list.adapter = adapter
-        chapters_list.addItemDecoration(
+        binding.chaptersList.adapter = adapter
+        binding.chaptersList.addItemDecoration(
             DividerItemDecoration(
                 context,
                 DividerItemDecoration.VERTICAL
             )
         )
+
+        searchText.onEach { query ->
+            if (query.isNotEmpty()) {
+                val action =
+                    ChapterFragmentDirections.actionChapterFragmentToSearchResultFragment(
+                        title = chooseSearchResultLang(lang),
+                        query = query,
+                        lang = lang
+                    )
+                navController.navigate(action)
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun chooseTitleLang(langCode: Int): String {

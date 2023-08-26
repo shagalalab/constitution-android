@@ -116,13 +116,12 @@
         android:name="com.shagalalab.constitution.ui.search.SearchResultFragment"
         android:label="{title}">
         <argument
+            android:name="query"
+            app:argType="string" />
+        <argument
             android:name="title"
             android:defaultValue="Izlew nátiyjeleri"
             app:argType="string" />
-        <argument
-            android:name="query"
-            app:argType="string" />
-
         <argument
             android:name="lang"
             android:defaultValue="0"

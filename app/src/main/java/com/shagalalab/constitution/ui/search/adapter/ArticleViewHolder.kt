@@ -2,14 +2,17 @@ package com.shagalalab.constitution.ui.search.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_view.view.*
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.shagalalab.constitution.databinding.ItemViewBinding
 
 class ArticleViewHolder(itemView: View, private val itemClick: (model: ArticleItem) -> Unit) :
     RecyclerView.ViewHolder(itemView) {
+    private val binding by viewBinding(ItemViewBinding::bind)
+
     fun populateModel(model: ArticleItem) {
-        itemView.title_text.text = model.title
-        itemView.description_text.text = model.description
-        itemView.setOnClickListener {
+        binding.titleText.text = model.title
+        binding.descriptionText.text = model.description
+        binding.root.setOnClickListener {
             itemClick.invoke(model)
         }
     }

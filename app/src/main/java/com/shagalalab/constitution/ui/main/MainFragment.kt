@@ -1,54 +1,64 @@
 package com.shagalalab.constitution.ui.main
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withResumed
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shagalalab.constitution.R
 import com.shagalalab.constitution.data.Language
+import com.shagalalab.constitution.databinding.FragmentMainBinding
 import com.shagalalab.constitution.ui.base.SearchableFragment
-import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 class MainFragment : SearchableFragment(R.layout.fragment_main) {
+    private val binding by viewBinding(FragmentMainBinding::bind)
 
     private lateinit var navController: NavController
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        en_flag.setOnClickListener {
+        binding.enFlag.setOnClickListener {
             chooseLanguage(Language.EN.ordinal)
         }
-        en_text.setOnClickListener {
+        binding.enText.setOnClickListener {
             chooseLanguage(Language.EN.ordinal)
         }
-        qq_flag.setOnClickListener {
+        binding.qqFlag.setOnClickListener {
             chooseLanguage(Language.QQ.ordinal)
         }
-        qq_text.setOnClickListener {
+        binding.qqText.setOnClickListener {
             chooseLanguage(Language.QQ.ordinal)
         }
-        uz_flag.setOnClickListener {
+        binding.uzFlag.setOnClickListener {
             chooseLanguage(Language.UZ.ordinal)
         }
-        uz_text.setOnClickListener {
+        binding.uzText.setOnClickListener {
             chooseLanguage(Language.UZ.ordinal)
         }
-        ru_flag.setOnClickListener {
+        binding.ruFlag.setOnClickListener {
             chooseLanguage(Language.RU.ordinal)
         }
-        ru_text.setOnClickListener {
+        binding.ruText.setOnClickListener {
             chooseLanguage(Language.RU.ordinal)
         }
-        setSubmitText {
-            if (it.isNotEmpty()) {
+
+        searchText.onEach { query ->
+            if (query.isNotEmpty()) {
                 val action = MainFragmentDirections.actionMainFragmentToSearchResultFragment(
-                    "Izlew nátiyjeleri",
-                    it
+                    query = query,
+                    title = "Izlew nátiyjeleri"
                 )
                 navController.navigate(action)
             }
-        }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun chooseLanguage(lang: Int) {

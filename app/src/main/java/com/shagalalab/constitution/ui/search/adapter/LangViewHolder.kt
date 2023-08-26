@@ -2,10 +2,13 @@ package com.shagalalab.constitution.ui.search.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.lang_item_view.view.*
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.shagalalab.constitution.databinding.LangItemViewBinding
 
 class LangViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private val binding by viewBinding(LangItemViewBinding::bind)
+
     fun populateModel(model: LangItem) {
-        itemView.tvLang.text = model.lang
+        binding.tvLang.text = model.lang
     }
 }

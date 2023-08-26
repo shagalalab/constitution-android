@@ -2,19 +2,23 @@ package com.shagalalab.constitution.ui.part
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shagalalab.constitution.R
 import com.shagalalab.constitution.data.Language
+import com.shagalalab.constitution.databinding.FragmentPartBinding
 import com.shagalalab.constitution.ui.base.SearchableFragment
 import com.shagalalab.constitution.ui.part.adapter.PartAdapter
-import kotlinx.android.synthetic.main.fragment_part.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PartFragment : SearchableFragment(R.layout.fragment_part) {
+    private val binding by viewBinding(FragmentPartBinding::bind)
 
     private val safeArgs: PartFragmentArgs by navArgs()
     private val lang by lazy { safeArgs.lang }
@@ -30,15 +34,15 @@ class PartFragment : SearchableFragment(R.layout.fragment_part) {
 
         viewModel.apply {
             getPartsByLangId(lang + 1)
-            chapterClickResult.observe(this@PartFragment, Observer {
+            chapterClickResult.observe(this@PartFragment) {
                 changeToChapterFragment(it)
-            })
-            preambleClickResult.observe(this@PartFragment, Observer {
+            }
+            preambleClickResult.observe(this@PartFragment) {
                 changeToArticleFragment(it)
-            })
-            partList.observe(this@PartFragment, Observer {
+            }
+            partList.observe(this@PartFragment) {
                 adapter.setData(it)
-            })
+            }
         }
     }
 
@@ -46,19 +50,19 @@ class PartFragment : SearchableFragment(R.layout.fragment_part) {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
-        parts_list.adapter = adapter
-        parts_list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        binding.partsList.adapter = adapter
+        binding.partsList.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
-        setSubmitText {
-            if (it.isNotEmpty()) {
+        searchText.onEach { query ->
+            if (query.isNotEmpty()) {
                 val action = PartFragmentDirections.actionPartFragmentToSearchResultFragment(
-                    chooseSearchResultLang(lang),
-                    it,
-                    lang
+                    title = chooseSearchResultLang(lang),
+                    query = query,
+                    lang = lang
                 )
                 navController.navigate(action)
             }
-        }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun changeToChapterFragment(id: Int) {

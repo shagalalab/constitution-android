@@ -2,36 +2,37 @@ package com.shagalalab.constitution.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shagalalab.constitution.R
 import com.shagalalab.constitution.data.DataHolder
+import com.shagalalab.constitution.databinding.ActivityMainBinding
 import com.shagalalab.constitution.ui.chapter.ChapterViewModel
 import com.shagalalab.constitution.ui.part.PartViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
+    private val binding by viewBinding(ActivityMainBinding::bind)
 
     private val partViewModel: PartViewModel by viewModel()
     private val chapterViewModel: ChapterViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
         val navController = findNavController(R.id.container)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        setSupportActionBar(toolbar)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         partViewModel.getAllParts()
-        partViewModel.partList.observe(this, Observer { partList ->
+        partViewModel.partList.observe(this) { partList ->
             DataHolder.parts = partList
             chapterViewModel.getAllChapters()
-        })
-        chapterViewModel.chapterList.observe(this, Observer {
+        }
+        chapterViewModel.chapterList.observe(this) {
             DataHolder.chapters = it
-        })
+        }
     }
 }

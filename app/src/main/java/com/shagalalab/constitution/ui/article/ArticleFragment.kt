@@ -7,11 +7,13 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shagalalab.constitution.R
-import kotlinx.android.synthetic.main.fragment_article.*
+import com.shagalalab.constitution.databinding.FragmentArticleBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ArticleFragment : Fragment(R.layout.fragment_article) {
+    private val binding by viewBinding(FragmentArticleBinding::bind)
 
     private val safeArgs: ArticleFragmentArgs by navArgs()
     private val chapterId by lazy { safeArgs.id }
@@ -21,7 +23,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        textView.movementMethod = ScrollingMovementMethod()
+        binding.textView.movementMethod = ScrollingMovementMethod()
         val s = SpannableStringBuilder()
         if (check) {
             viewModel.getArticlesByChapterId(chapterId)
@@ -32,7 +34,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
             list.forEach {
                 s.append(it.normalizedDescription())
             }
-            textView.text = s
+            binding.textView.text = s
         })
     }
 }
